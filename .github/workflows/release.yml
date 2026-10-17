@@ -1,0 +1,24 @@
+name: Build release downloads
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Verify release source
+        run: |
+          python3 scripts/build.py --check
+          python3 -m unittest discover -s tests -p "test_*.py"
+          node scripts/check-js.cjs
+      - name: Package and attach release downloads
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/release.py

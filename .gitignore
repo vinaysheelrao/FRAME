@@ -17,6 +17,7 @@ FRAME-library-*.json
 *.zip
 playwright-report/
 test-results/
+release-dist/
 .DS_Store
 Thumbs.db
 .vscode/

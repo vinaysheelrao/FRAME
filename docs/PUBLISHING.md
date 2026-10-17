@@ -21,11 +21,14 @@ The steps below also apply when publishing an authorized fork under the license.
    noncommercial use. Source available. Bring your own media and metadata key."
 4. Enable Issues if desired and **Settings → Code security → Private vulnerability
    reporting** (the exact UI label may vary). See SECURITY.md.
-5. Confirm the build-check workflow passes. It does not deploy a website or publish
-   releases. This bundle is intended as a downloadable local app.
-6. Create a `v0.1.0` release and attach the generated `FRAME.html`. GitHub adds source
-   archives itself. Optionally attach `FRAME-v0.1.0-personal-use.zip` containing
-   the HTML, README, license and third-party notices, plus `SHA256SUMS.txt`.
+5. Confirm the build-check workflow passes. This project is intended as a
+   downloadable local app; no hosted application is deployed.
+6. Publish a versioned release such as `v0.1.0`. The separate **Build release
+   downloads** workflow verifies the tagged source, then attaches `FRAME.html`,
+   the personal-use ZIP, the repository ZIP and `SHA256SUMS.txt`. GitHub also adds
+   its standard source archives. Wait for this workflow to pass before sharing
+   download links. The job uses a temporary token with contents-write permission
+   scoped to this repository; no shared API key or browser file access is needed.
 
 For a local Git checkout, after replacing the example URL with your actual repo:
 

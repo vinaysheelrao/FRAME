@@ -21,7 +21,10 @@ The input HTML uses three tokens for the font, attribution logo and legal notice
 `scripts/build.py` embeds all three and verifies recorded asset hashes.
 
 Run the README's build/check commands after editing. CI runs those same commands
-with read-only repository permissions; it does not publish or deploy the app.
+with read-only repository permissions. A separate release workflow runs only when
+a release is published. It verifies the same source, packages tracked files and
+attaches the app, ZIP downloads and checksums using a temporary repository token.
+Only that release job receives contents-write permission; credentials are not saved.
 
 ## Optional browser smoke test
 
