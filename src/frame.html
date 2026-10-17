@@ -1,0 +1,576 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: LicenseRef-FRAME-Personal-Noncommercial-1.0
+Original FRAME code: Copyright (c) 2026 FRAME contributors.
+Third-party materials retain their own terms. Full notices are in About & help. -->
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="FRAME — your private local film and series library.">
+<meta name="color-scheme" content="dark"><title>FRAME · Your local cinema</title>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(data:font/woff2;base64,@@INTER@@) format('woff2')}
+:root{--bg:#0b1017;--surface:#101923;--line:#24303d;--text:#f5f6f8;--muted:#a2adbb;--gold:#edbd63;--radius:7px;--gutter:clamp(22px,3.2vw,50px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 'Inter'}button,input,select,textarea{font:inherit}button,a,input,select,textarea{outline-offset:4px}button:focus-visible,a:focus-visible{outline:2px solid var(--gold)}button{cursor:pointer;color:inherit}button:disabled{opacity:.45;cursor:default}a{color:var(--gold);text-underline-offset:4px}button,.button{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:10px 16px;display:inline-flex;align-items:center;justify-content:center;gap:10px;line-height:1.5;text-decoration:none;transition:background .18s,transform .18s,border-color .18s}button:hover:not(:disabled),.button:hover{background:#1b2937;border-color:#566574}.primary{color:#101216;background:var(--gold);border-color:var(--gold);font-weight:650}.primary:hover:not(:disabled){background:#f8cf83;border-color:#f8cf83}.ghost{background:transparent}.icon-btn{padding:9px;border-color:transparent;background:transparent}.icon{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.small{font-size:13px}.muted{color:var(--muted)}.gold{color:var(--gold)}.row{display:flex;align-items:center;gap:12px}.wrap{flex-wrap:wrap}.between{justify-content:space-between}.stack{display:grid;gap:14px}.hidden,[hidden]{display:none!important}h1,h2,h3,p{margin-top:0}h2{font-size:27px;line-height:1.25;letter-spacing:-.7px;margin-bottom:16px}h3{font-size:18px;line-height:1.4;margin-bottom:10px}p{margin-bottom:16px}hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+header{height:64px;display:flex;align-items:center;padding:0 var(--gutter);gap:48px;border-bottom:1px solid #ffffff12;background:#090f16}.brand{display:inline-flex;align-items:center;gap:14px;font-size:23px;letter-spacing:2px;font-weight:650;white-space:nowrap;color:var(--text);text-decoration:none}.brand svg{width:29px;height:29px;color:var(--gold)}nav{display:flex;height:100%;align-items:stretch;gap:24px}nav button{position:relative;background:none;border:0;padding:0 5px;border-radius:0;color:#bdc6d0;font-size:14px;white-space:nowrap}nav button.active{color:#fff;font-weight:600}nav button.active:after{content:'';height:3px;background:var(--gold);position:absolute;bottom:3px;left:0;right:0;border-radius:3px}nav button:hover:not(:disabled){background:transparent;color:#fff}.header-tools{margin-left:auto;display:flex;align-items:center;gap:17px}.search{position:relative;display:flex;align-items:center;width:clamp(160px,19vw,285px)}.search svg{position:absolute;top:50%;transform:translateY(-50%);left:13px;color:#bdc8d6}.search input{width:100%;padding:9px 12px 9px 44px;border-radius:8px;background:#111923;border:1px solid #34404c;color:white;font-size:14px}input::placeholder{color:#8592a1}header .primary{font-size:14px;white-space:nowrap}
+.hero{position:relative;min-height:424px;isolation:isolate;overflow:hidden;background:#0b0d11}.hero:before{content:'';position:absolute;inset:0;background-image:linear-gradient(90deg,#080b10f0 0%,#080b10a0 35%,#080b1010 75%),linear-gradient(0deg,var(--bg) 0%,transparent 55%);background-size:cover;background-position:center;z-index:-1}.hero-content{padding:64px var(--gutter) 20px;max-width:840px}.hero h1{font-size:clamp(45px,5.2vw,80px);line-height:.99;letter-spacing:-2.8px;margin-bottom:18px;font-weight:720}.hero p{font-size:25px;color:#bdc6d1;margin-bottom:24px;line-height:1.4}.hero .row button{font-size:17px;padding:13px 21px}.hero .ghost{border-color:#b6c1cc;background:#07111a70}.hero-note{display:flex;gap:11px;align-items:center;color:#9faebc;font-size:13px;margin-top:29px}.hero-note .icon{width:18px;height:18px}.hero.has-library h1{font-size:58px;line-height:1.06}.hero.has-library p{font-size:17px;max-width:560px;line-height:1.6}.hero.has-library .hero-content{padding-top:55px}.hero-meta{margin-bottom:12px;color:#d3dbe3;font-size:14px}.hero .featured-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;z-index:-2}
+main{padding:14px var(--gutter) 24px;min-height:410px}.notice{border:1px solid #25313e;border-radius:9px;background:#111a24a8;display:flex;align-items:center;justify-content:space-between;padding:10px 17px;color:#d6dde6;font-size:14px;margin-bottom:27px;gap:12px}.notice .icon{width:20px;color:var(--gold)}.notice button{border:0;padding:3px 0;background:transparent;color:var(--gold);font-size:14px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:16px}.section-head h2{margin:0}.heading-meta{font-size:13px;color:var(--muted);margin-left:22px;letter-spacing:0;font-weight:400}.filters{display:flex;align-items:center;gap:7px}.filters button{border-radius:22px;font-size:12px;padding:5px 14px;background:#111a24}.filters button.active{background:var(--gold);color:#111;border-color:var(--gold)}select{background:#101923;border:1px solid var(--line);color:var(--text);padding:9px 11px;border-radius:6px;font-size:13px}#sort{background:transparent;border-color:transparent;max-width:160px}.sort-label{margin-left:22px;color:var(--muted);font-size:12px}.posters{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px}.film{min-width:0;position:relative}.poster{width:100%;aspect-ratio:2/2.7;position:relative;overflow:hidden;padding:0;border-radius:6px;border:1px solid #ffffff1b;background:#172231;display:block;text-align:left}.poster img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .3s}.poster:hover img{transform:scale(1.045)}.poster:hover{border-color:#83909f}.poster-fallback{display:flex;flex-direction:column;justify-content:flex-end;height:100%;padding:19px;background:linear-gradient(150deg,#243d50,#13202f 60%,#2d2630);font-weight:650;font-size:21px;line-height:1.25;color:#d9e4ee}.poster-fallback svg{margin-bottom:auto;color:#7791a8;width:35px;height:35px}.poster-hover{position:absolute;inset:0;background:#02071065;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}.poster:hover .poster-hover,.poster:focus-visible .poster-hover{opacity:1}.poster-hover span{border:1px solid #ffffff99;border-radius:50%;padding:14px;background:#0b101780}.poster-hover svg{display:block}.film-title{font-size:15px;line-height:1.4;margin:8px 1px 1px;font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.film-sub{font-size:12px;color:var(--muted);margin:0 1px}.film-heart{position:absolute;right:7px;top:7px;padding:6px;background:#080e17c9;border:1px solid #ffffff30;border-radius:50%;opacity:0}.film:hover .film-heart,.film-heart:focus-visible,.film-heart.saved{opacity:1}.film-heart .icon{width:17px;height:17px}.film-heart.saved{color:var(--gold)}.progress{height:3px;background:#ffffff33;position:absolute;bottom:0;left:0;right:0}.progress i{display:block;height:100%;background:var(--gold)}.tag{position:absolute;bottom:9px;left:9px;font-size:10px;background:#0b1017d9;color:#dce5ec;border:1px solid #ffffff22;padding:1px 6px;border-radius:3px}.rail{display:grid;grid-auto-columns:210px;grid-auto-flow:column;gap:14px;overflow-x:auto;padding-bottom:12px;scrollbar-color:#344250 transparent;margin-bottom:25px}.rail .poster{aspect-ratio:16/9}.rail .poster-fallback{font-size:16px;padding:12px}.empty{padding:65px 20px;text-align:center;border:1px dashed #334253;border-radius:9px}.empty .icon{width:40px;height:40px;color:var(--gold);margin-bottom:13px}.empty h3{font-size:23px}.empty p{color:var(--muted);max-width:520px;margin:0 auto 22px}.library-tools{margin-bottom:22px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.library-tools button{font-size:12px;padding:5px 11px}.library-tools .icon{width:16px;height:16px}footer{border-top:1px solid #202b37;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;gap:15px}footer .brand{font-size:15px;font-weight:500}footer .brand svg{width:23px;height:23px}.footer-left{display:flex;align-items:center;gap:23px}.footer-left>span:last-child{border-left:1px solid #35414e;padding-left:23px}footer button{padding:0;border:0;font-size:12px;background:transparent;color:var(--muted)}
+dialog{background:#101923;color:var(--text);border:1px solid #344355;border-radius:13px;padding:0;width:min(850px,calc(100% - 32px));max-height:90dvh;box-shadow:0 30px 100px #0009}dialog::backdrop{background:#02060cce;backdrop-filter:blur(7px)}.dialog-top{display:flex;align-items:center;justify-content:space-between;padding:20px 25px;border-bottom:1px solid var(--line);gap:10px}.dialog-top h2{margin:0;font-size:23px}.dialog-body{padding:24px 26px}.dialog-body>p:last-child{margin-bottom:0}.dialog-close{padding:5px;background:transparent;border:0}.field{display:grid;gap:7px;font-size:13px;color:#c3ceda}.field input,.field textarea,.field select{width:100%;padding:10px 12px;border:1px solid #344250;background:#0a121c;color:#fff;border-radius:6px}.field textarea{min-height:90px;resize:vertical}.field .small{color:var(--muted);font-size:12px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.check{display:flex;gap:10px;align-items:center;font-size:13px}.check input{accent-color:var(--gold);width:16px;height:16px}.info{padding:14px 16px;border:1px solid #344151;border-radius:7px;background:#152130;font-size:13px;line-height:1.65}.folder-row{padding:12px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px}.folder-row .icon{width:19px;height:19px}.folder-row button{font-size:12px;padding:6px 10px}.folder-name{overflow-wrap:anywhere}.steps{counter-reset:step;display:grid;gap:23px}.step{display:grid;grid-template-columns:32px 1fr;gap:14px}.step:before{counter-increment:step;content:counter(step);border:1px solid #76613a;color:var(--gold);border-radius:50%;height:30px;width:30px;text-align:center;line-height:28px;font-weight:600}.step h3{margin-bottom:6px}.step p{color:var(--muted);font-size:14px;margin-bottom:0}.detail-layout{display:grid;grid-template-columns:190px 1fr;gap:25px}.detail-cover{grid-row:span 2;width:100%;border-radius:7px;aspect-ratio:2/3;object-fit:cover;background:#1b2b3a}.detail-title{font-size:33px;line-height:1.2;margin-bottom:12px;letter-spacing:-1px}.detail-meta{font-size:13px;color:var(--gold);margin-bottom:16px}.synopsis{grid-column:2;font-size:15px;line-height:1.75;color:#ccd5df}.cast-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}.cast-person{font-size:13px}.cast-person span{color:var(--muted);display:block;font-size:12px}.sources{font-size:12px;line-height:1.8;color:var(--muted);margin-top:20px}.sources a{white-space:nowrap}.file-row{padding:13px 0;border-top:1px solid var(--line);display:flex;gap:15px;align-items:center;justify-content:space-between}.file-row .file-label{min-width:0}.file-row strong{font-size:13px;display:block;overflow-wrap:anywhere}.file-row small{font-size:11px;color:var(--muted);display:block;overflow-wrap:anywhere}.file-row button{padding:7px 12px;font-size:12px}.match-result{display:flex;gap:14px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:7px;background:#0b141e;cursor:pointer;text-align:left;justify-content:stretch}.match-result img{width:43px;height:64px;object-fit:cover;border-radius:3px}.match-result strong{display:block;font-size:15px}.match-result small{display:block;color:var(--muted);font-size:12px}.status-dot{width:6px;height:6px;background:#78b599;border-radius:50%;display:inline-block;margin-right:7px}#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);max-width:min(640px,90vw);border:1px solid #49596b;border-radius:8px;background:#1a2a3a;padding:11px 19px;box-shadow:0 10px 50px #0009;z-index:100;font-size:14px;pointer-events:none}#taskbar{position:sticky;top:0;z-index:5;background:#1b2a38;border-bottom:1px solid var(--line);padding:9px var(--gutter);font-size:13px;display:flex;align-items:center;justify-content:space-between}#taskbar button{padding:2px 9px;font-size:12px}#playerDialog{width:min(1200px,calc(100% - 24px));background:#070b10}video{width:100%;max-height:65dvh;display:block;background:#000}.player-bottom{padding:15px 24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}.player-bottom button{font-size:12px;padding:6px 11px}#playerError{margin:15px 24px}.subtle-title{font-size:12px;text-transform:uppercase;letter-spacing:1.3px;color:var(--muted);margin:20px 0 10px}.danger{color:#f1a7a7}details{font-size:13px}summary{cursor:pointer;color:var(--gold)}.busy{opacity:.6;pointer-events:none}#matchStatus{font-size:13px;color:var(--muted)}
+@media(min-width:1600px){.posters{grid-template-columns:repeat(8,minmax(0,1fr))}.hero{min-height:480px}.hero-content{padding-top:80px}}
+@media(max-width:1150px){header{gap:25px}nav{gap:13px}.header-tools{gap:8px}.posters{grid-template-columns:repeat(5,minmax(0,1fr))}.section-head{flex-wrap:wrap}.hero h1{font-size:68px}.hero p{font-size:22px}.heading-meta{margin-left:12px}}
+@media(max-width:800px){header{height:auto;min-height:114px;flex-wrap:wrap;gap:8px 18px;padding-top:13px;padding-bottom:0}.brand{font-size:21px}nav{order:3;width:100%;height:42px;gap:25px;overflow-x:auto}.header-tools{gap:5px}.search{width:170px}header .primary{padding:8px 10px;font-size:12px}header .primary svg{width:18px}.hero{min-height:385px}.hero-content{padding-top:50px}.hero h1{font-size:61px}.hero p{font-size:20px}.hero.has-library h1{font-size:46px}.posters{grid-template-columns:repeat(4,minmax(0,1fr))}.notice{font-size:12px}.notice button{font-size:12px}.section-head h2{font-size:25px}.detail-layout{grid-template-columns:140px 1fr;gap:18px}.detail-title{font-size:28px}}
+@media(max-width:550px){.header-tools .search{width:36px}.search input{width:36px;border-color:transparent;background:transparent;padding-right:0;cursor:pointer}.search:focus-within{position:absolute;left:var(--gutter);right:var(--gutter);width:auto;z-index:2}.search:focus-within input{width:100%;background:#162230;padding-right:12px;cursor:text;border-color:var(--line)}.search svg{pointer-events:none;left:8px}.brand{gap:9px}.header-tools{gap:4px}header .primary{font-size:12px;gap:7px}.hero{min-height:390px}.hero h1{font-size:50px;letter-spacing:-1.7px}.hero-content{padding-top:45px}.hero p{font-size:18px;max-width:270px;line-height:1.5}.hero .row button{font-size:13px;padding:12px 13px;gap:7px}.hero-note{font-size:11px;margin-top:30px}.hero.has-library .hero-content{padding-top:40px}.hero.has-library h1{font-size:39px}.hero.has-library p{font-size:14px;max-width:330px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.posters{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}.poster{aspect-ratio:2/2.8}.heading-meta{display:block;margin:8px 0 0;font-size:12px}.section-head{align-items:flex-start;margin-top:24px;gap:12px}.filters{flex-wrap:wrap}.sort-label{margin-left:6px;display:none}#sort{font-size:12px;max-width:132px;padding-left:0}.filters button{padding:5px 12px}.notice{padding:10px 12px;align-items:flex-start}.notice>.row{align-items:flex-start;gap:8px}.notice button{white-space:nowrap;gap:4px}.notice button svg{display:none}footer{align-items:flex-start}.footer-left{gap:12px;flex-wrap:wrap}.footer-left>span:last-child{padding-left:12px}.footer-left .brand{font-size:12px;gap:8px}footer>button{white-space:nowrap}.dialog-top{padding:17px 18px}.dialog-body{padding:19px}.detail-layout{grid-template-columns:90px 1fr;gap:14px}.detail-title{font-size:25px}.detail-meta{font-size:11px}.detail-cover{grid-row:auto;margin-top:3px}.synopsis{grid-column:1/-1}.detail-actions{grid-column:1/-1}.cast-list{grid-template-columns:1fr 1fr}.field-grid{grid-template-columns:1fr}.rail{grid-auto-columns:180px}.folder-row{align-items:flex-start}.folder-row>.row{flex-wrap:wrap;justify-content:flex-end}dialog{max-height:93dvh}.hero .hero-meta{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Scroll surfaces share their background; no bright native scrollbar gutters. */
+*{scrollbar-width:thin;scrollbar-color:#465362 transparent}
+*::-webkit-scrollbar{width:8px;height:8px;background:transparent}
+*::-webkit-scrollbar-track,*::-webkit-scrollbar-corner{background:transparent}
+*::-webkit-scrollbar-thumb{background:#465362;border:2px solid transparent;background-clip:padding-box;border-radius:20px;min-height:36px}
+*::-webkit-scrollbar-thumb:hover{background-color:#718091}
+*::-webkit-scrollbar-button{display:none}
+.rail{scrollbar-color:#465362 transparent}
+input[type=range]{appearance:none;-webkit-appearance:none;background:transparent;accent-color:var(--gold);height:24px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:8px;background:#ffffff22}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;margin-top:-4px;border-radius:50%;background:var(--gold);border:0}
+input[type=range]::-moz-range-track{height:4px;border-radius:8px;background:#ffffff22}
+input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radius:50%;background:var(--gold)}
+video::-webkit-media-controls-panel{background:linear-gradient(transparent,#070b10eb)}
+.dialog-top{position:sticky;top:0;z-index:3;background:#101923}
+#reconnectName,#reconnectPath{overflow-wrap:anywhere}
+#lookupSummary{margin:0 0 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+#lookupSummary button{font-size:12px;padding:4px 10px}
+
+
+/* Compact actions, preserving clear focus states and readable labels. */
+.hero .row button{padding:7px 18px;font-size:15px;min-height:36px;line-height:1.4}
+header .primary,#settingsAdd,#helpAdd{padding:6px 14px;min-height:34px}
+#detailPlay{padding:6px 14px;min-height:34px}
+.cast-person{display:flex;gap:11px;align-items:center;min-width:0;line-height:1.4}
+.cast-person .cast-avatar{position:relative;display:block;width:44px;height:44px;border-radius:50%;overflow:hidden;flex:0 0 44px;background:#243140}
+.cast-avatar .cast-photo{width:100%;height:100%;object-fit:cover;display:block}
+.cast-avatar .cast-initials{display:flex;align-items:center;justify-content:center;height:100%;width:100%;color:#c8d2dd;font-size:13px;font-weight:600}
+.cast-label{min-width:0;overflow-wrap:anywhere}.cast-label>span{margin-top:3px}
+#sourceRoot{width:100%;padding:10px 12px;background:#0b141e;color:#fff;border:1px solid var(--line);border-radius:6px}
+#sourceFullPath,#sourceRelative,#sourceFilename,#subtitleVideo{overflow-wrap:anywhere}
+@media(max-width:550px){.hero .row button{padding:7px 12px;font-size:13px;min-height:34px}header .primary{padding:5px 10px}.cast-list{gap:15px 12px}.cast-person{gap:8px}.cast-person .cast-avatar{width:36px;height:36px;flex-basis:36px}}
+
+</style><!-- Embedded Inter font license:
+Copyright (c) 2016 The Inter Project Authors (https://github.com/rsms/inter)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION AND CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+-->
+</head>
+<body>
+<header>
+ <a class="brand" href="#" id="brand"></a>
+ <nav aria-label="Library views"><button class="active" data-view="all">Home</button><button data-view="movie">Movies</button><button data-view="tv">Series</button><button data-view="list">My list</button></nav>
+ <div class="header-tools"><label class="search"><span id="searchIcon"></span><input id="search" type="search" aria-label="Search library" placeholder="Search library…" autocomplete="off"></label><button class="icon-btn" id="settingsBtn" aria-label="Settings"></button><button class="primary" id="addFolderBtn"></button></div>
+</header>
+<div id="taskbar" hidden><span id="taskText" role="status"></span><button id="cancelTask">Cancel</button></div>
+<section class="hero" id="hero"><div class="hero-content" id="heroContent"></div></section>
+<main>
+ <div class="notice" id="notice"></div>
+ <section id="continueSection" hidden><h2>Pick up where you left off</h2><div class="rail" id="continueRail"></div></section>
+ <div class="section-head"><h2><span id="collectionTitle">The collection</span><span class="heading-meta" id="count"></span></h2><div class="filters"><button class="active" data-filter="all">All</button><button data-filter="movie">Movies</button><button data-filter="tv">Series</button><label class="sort-label" for="sort">Sort by</label><select id="sort" aria-label="Sort library"><option value="added">Recently added</option><option value="title">Title A–Z</option><option value="year">Release year</option><option value="rating">Rating</option></select></div></div>
+ <div class="library-tools" id="libraryTools" hidden><button id="lookupAll"></button><button id="foldersBtn"></button><select id="genre" aria-label="Filter by genre"><option value="">All genres</option></select><select id="statusFilter" aria-label="Filter by status"><option value="">Any status</option><option value="unmatched">Needs metadata</option><option value="review">Review match</option><option value="watched">Watched</option><option value="offline">Reconnect files</option></select></div>
+ <div id="lookupSummary" class="small muted" hidden></div><div class="posters" id="posters"></div><div id="empty" class="empty" hidden></div>
+</main>
+<footer><div class="footer-left"><span class="brand" id="footerBrand"></span><span>Your files stay yours.</span></div><button id="helpBtn">About & help</button></footer>
+<dialog id="settingsDialog" aria-labelledby="settingsTitle"><div class="dialog-top"><h2 id="settingsTitle">Make yourself at home</h2><button class="dialog-close" data-close aria-label="Close settings"></button></div><div class="dialog-body stack">
+ <div class="row between"><h3 style="margin:0">Your folders</h3><button id="settingsAdd" class="small"></button></div><div id="folderList"></div>
+ <p class="small muted">Folders are read-only. FRAME never moves, renames, or deletes your videos. Reconnect after reopening if your browser asks for permission. Use Rescan to discover changes.</p>
+ <hr><h3>Metadata & artwork</h3>
+ <label class="field">Metadata source<select id="provider"><option value="tmdb">TMDB · films & series · API key required</option><option value="tvmaze">TVmaze · series only · no key</option><option value="off">Offline · manual details only</option></select></label>
+ <label class="field" id="tokenField">TMDB API key or Read Access Token<input type="password" id="apiToken" placeholder="Paste your own TMDB credential here" autocomplete="off"><span class="small">Stored for this tab unless you choose Remember. <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener noreferrer">Get a credential at TMDB</a>.</span></label>
+ <label class="check"><input type="checkbox" id="rememberToken">Remember the credential in this browser</label>
+ <div class="field-grid"><label class="field">Metadata language<input id="language" value="en-US" placeholder="en-US" maxlength="12"></label><label class="field">JustWatch region<input id="region" value="us" placeholder="us, in, gb…" maxlength="2"></label></div>
+ <label class="check"><input type="checkbox" id="autoLookup">Look up new titles automatically after a folder scan</label>
+ <label class="field">Automatic matching<select id="matchMode"><option value="confident">Confident matches · clear winner required</option><option value="best">Best guess · accept broader title matches</option></select><span class="small">Both modes assign artwork and details automatically. Ambiguous remakes still wait for review. Scores measure matching evidence, not a statistical probability.</span></label>
+ <label class="check"><input type="checkbox" id="cacheArt" checked>Cache downloaded artwork for offline browsing</label>
+ <div class="info">Lookups send cleaned titles and years to the chosen service. Artwork loads from that service’s image servers. Your video files are never uploaded. IMDb and JustWatch searches open in a new tab; this file does not scrape their pages.</div>
+ <div class="row wrap"><button class="primary" id="saveSettings">Save settings</button><button id="testConnection">Test connection</button><span id="connectionStatus" class="small muted" role="status"></span></div>
+ <hr><h3>Your library, backed up</h3><p class="small muted">Backup includes watchlist, progress, file paths, manual details, and TVmaze data with credits. TMDB-derived details and artwork are excluded; match IDs are retained for refresh. Videos, folder access, and credentials are excluded. Import merges by file identity; select the original folders again to reconnect.</p><div class="row wrap"><button id="exportBtn">Export library</button><button id="importBtn">Import library</button></div>
+ <details><summary>Local playback & storage</summary><p class="small muted">Chrome or Edge desktop is recommended for remembered folder handles. The folder upload fallback works without handle persistence. Browser storage is per browser and location; clearing site data removes the saved library. Renaming or moving this HTML may create a separate storage location. MP4 (H.264/AAC) and WebM are the safest formats. MKV, HEVC, AVI, DTS, and other codecs may need an external player. SRT and VTT subtitle files can be loaded in the player. No transcoding or background scanning runs while the page is closed.</p></details>
+</div></dialog>
+<dialog id="helpDialog" aria-labelledby="helpTitle"><div class="dialog-top"><h2 id="helpTitle">A cinema that’s yours.</h2><button class="dialog-close" data-close aria-label="Close help"></button></div><div class="dialog-body"><div class="steps"><div class="step"><div><h3>Bring your collection</h3><p>Choose one or more folders. FRAME finds videos in subfolders and cleans release tags from filenames. For best matches, use Film Name (2024).mp4 or Series Name S01E02.mkv. Add individual files if folder access is unavailable.</p></div></div><div class="step"><div><h3>Give every title a face</h3><p>In Settings, connect TMDB for films and series, or use TVmaze for series without a key. Automatic matching runs after a scan once a metadata source is configured. Use Auto-match library to retry the full library. Strong ranked matches are applied; uncertain matches wait for your choice. Retry includes previously unresolved titles. Open a title to correct its match, add your own details, or search IMDb and JustWatch.</p></div></div><div class="step"><div><h3>Press play. Settle in.</h3><p>Play local files with browser controls, resume where you stopped, add subtitles, and keep a watchlist. After reopening, Play will reconnect a permitted folder or ask you to select the video again. Export the library occasionally as a backup.</p></div></div></div><hr><p class="small muted">FRAME is an independent local video library. No films, series, posters, or provider datasets are bundled. The banner uses recently played artwork, then artwork from a recently added title. Without artwork it stays plain.</p><p><a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer"><img src="@@TMDB_LOGO@@" alt="TMDB" style="width:80px;height:auto"></a></p><p class="small muted">Metadata: <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">TMDB</a> (This product uses the TMDB API but is not endorsed or certified by TMDB. This application uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.) and <a href="https://www.tvmaze.com/api" target="_blank" rel="noopener noreferrer">TVmaze</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA</a>, normalized fields). No affiliation with Netflix, IMDb, or JustWatch.</p><p class="small muted">Free for personal noncommercial use. Metadata searches send title queries to your chosen provider; videos stay local. Provider terms apply separately. TMDB data expires after 150 days and is excluded from backups; match IDs are retained for refresh.</p><details id="legalNotices"><summary>License, privacy & third-party notices</summary>@@LEGAL@@</details><div class="row wrap"><button class="primary" id="helpAdd">Add a folder</button><button id="addFilesBtn">Add individual files</button></div></div></dialog>
+<dialog id="detailDialog" aria-labelledby="detailHeading"><div class="dialog-top"><span class="small muted">IN YOUR COLLECTION</span><button class="dialog-close" data-close aria-label="Close title details"></button></div><div class="dialog-body" id="detailBody"></div></dialog>
+<dialog id="matchDialog" aria-labelledby="matchTitle"><div class="dialog-top"><h2 id="matchTitle">Find the right title</h2><button class="dialog-close" data-close aria-label="Close metadata search"></button></div><div class="dialog-body stack"><p class="small muted" id="matchFile"></p><form id="matchForm" class="row"><input id="matchQuery" aria-label="Title to search" style="flex:1;min-width:0;padding:11px;background:#0b141e;color:white;border:1px solid #344250;border-radius:6px"><button class="primary">Search</button></form><label class="field">Search type<select id="matchType"><option value="movie">Film</option><option value="tv">Series</option></select></label><div id="matchStatus" role="status"></div><div id="matchResults" class="stack"></div></div></dialog>
+<dialog id="editDialog" aria-labelledby="editTitle"><div class="dialog-top"><h2 id="editTitle">Your title details</h2><button class="dialog-close" data-close aria-label="Close editor"></button></div><form id="editForm" class="dialog-body stack"><label class="field">Title<input id="editName" required maxlength="250"></label><div class="field-grid"><label class="field">Year<input id="editYear" maxlength="4" inputmode="numeric"></label><label class="field">Type<select id="editType"><option value="movie">Film</option><option value="tv">Series</option></select></label></div><label class="field">Synopsis<textarea id="editSynopsis" maxlength="10000"></textarea></label><label class="field">Genres, separated by commas<input id="editGenres" maxlength="300"></label><label class="field">Cast and characters · one per line, Actor — Character<textarea id="editCast" maxlength="6000"></textarea></label><label class="field">Cover image<input id="editCover" type="file" accept="image/jpeg,image/png,image/webp"><span class="small">Optional local image, up to 5 MB.</span></label><button class="primary" type="submit">Save details</button></form></dialog>
+<dialog id="reconnectDialog" aria-labelledby="reconnectTitle"><div class="dialog-top"><h2 id="reconnectTitle">Reconnect this video</h2><button class="dialog-close" data-close aria-label="Close reconnect video"></button></div><div class="dialog-body stack"><h3 id="reconnectName"></h3><p class="muted" id="reconnectReason"></p><p class="small muted" id="reconnectPath"></p><div class="row wrap"><button class="primary" id="reconnectFileBtn">Choose video & play</button><button id="reconnectFolderBtn">Reconnect its folder</button></div><p class="small muted">Your saved title details and progress are kept. Browser permission is required to open a local file after access expires.</p></div></dialog>
+<input id="reconnectInput" type="file" accept="video/*,.mkv,.avi,.m4v,.mov,.ts,.mts,.m2ts,.mpg,.mpeg,.wmv,.vob,.ogv" hidden>
+<dialog id="subtitlesDialog" aria-labelledby="subtitleTitle"><div class="dialog-top"><h2 id="subtitleTitle">Subtitles</h2><button class="dialog-close" data-close aria-label="Close subtitles"></button></div><div class="dialog-body stack"><p class="small muted" id="subtitleVideo"></p><div id="subtitleList"></div><div class="row wrap"><button class="primary" id="browseSubtitleBtn">Browse SRT / VTT</button><button id="subtitlesOffBtn">Turn subtitles off</button></div><p class="small muted" id="subtitleFolderStatus"></p></div></dialog>
+<dialog id="fileLocationDialog" aria-labelledby="sourceTitle"><div class="dialog-top"><h2 id="sourceTitle">Original video location</h2><button class="dialog-close" data-close aria-label="Close file location"></button></div><div class="dialog-body stack"><h3 id="sourceFilename"></h3><p class="small muted" id="sourceRelative"></p><label class="field"><span id="sourceRootLabel"></span><input id="sourceRoot" placeholder="D:\Movies" autocomplete="off"></label><p class="small muted">Browsers do not disclose a selected file’s absolute disk path. Enter the library folder’s location once; FRAME will combine it with the video’s relative path.</p><div class="info" id="sourceFullPath"></div><div class="row wrap"><button id="saveSourceRoot">Remember folder path</button><button class="primary" id="copySourcePath">Copy original file path</button></div><p class="small muted">Paste the path into your desktop player or File Explorer. A standalone HTML page cannot launch the default desktop player. Save copy downloads a separate copy to the browser’s chosen location.</p></div></dialog>
+<dialog id="playerDialog" aria-labelledby="playerTitle"><div class="dialog-top"><h2 id="playerTitle"></h2><button class="dialog-close" data-close aria-label="Close player"></button></div><video id="video" controls playsinline preload="metadata"></video><div id="playerError" class="info" hidden></div><div class="player-bottom"><button id="subtitleBtn">Load SRT / VTT subtitles</button><button id="fullscreenBtn">Full screen</button><button id="fileLocationBtn">File location</button><a id="downloadVideo" class="button small" download>Save copy</a><span class="small muted" id="playerNote"></span></div></dialog>
+<input id="folderInput" type="file" webkitdirectory multiple hidden><input id="fileInput" type="file" accept="video/*,.mkv,.avi,.m4v,.mov,.ts,.mts,.m2ts,.mpg,.mpeg,.wmv,.vob,.ogv" multiple hidden><input id="backupInput" type="file" accept="application/json,.json" hidden><input id="subtitleInput" type="file" accept=".srt,.vtt" hidden><div id="toast" role="status" hidden></div>
+<script>
+'use strict';
+const PREVIEW=[];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const iconPaths={frame:'M3 10V3h7 M14 3h7v7 M21 14v7h-7 M10 21H3v-7',folder:'M3 7V5h6l2 2h10v13H3Z',search:'M21 21l-5-5 M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0',settings:'M9 3l-1 3-3 1-2 3 2 2-1 3 2 3 3-1 2 3h3l1-3 3-1 2-3-2-2 1-3-2-3-3 1-2-2Z M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0',play:'M9 5l11 7-11 7Z',info:'M12 11v6 M12 7h.01 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',close:'M6 6l12 12 M18 6L6 18',heart:'M20 5c-3-3-7-1-8 1-1-2-5-4-8-1-5 5 8 14 8 14S25 10 20 5Z',arrow:'M4 12h16 M14 6l6 6-6 6',spark:'M12 3l2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z M21 2v4 M19 4h4',film:'M3 3h18v18H3Z M7 3v18 M17 3v18 M3 8h4 M3 16h4 M17 8h4 M17 16h4',refresh:'M20 7V2l-4 4 M20 7a9 9 0 1 0 1 8',check:'M5 12l4 4L20 5',plus:'M12 4v16 M4 12h16'};
+function ico(name){return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${iconPaths[name]||iconPaths.film}"/></svg>`}
+const brand=ico('frame')+'<span>FRAME</span>';
+$('#brand').innerHTML=brand;$('#footerBrand').innerHTML=brand;$('#searchIcon').innerHTML=ico('search');$('#settingsBtn').innerHTML=ico('settings');$('#addFolderBtn').innerHTML=ico('folder')+'Add folder';$('#settingsAdd').innerHTML=ico('plus')+'Add folder';$('#lookupAll').innerHTML=ico('spark')+'Auto-match library';$('#foldersBtn').innerHTML=ico('folder')+'Manage folders';$$('[data-close]').forEach(b=>b.innerHTML=ico('close'));
+let db, items=[],folders=[], art=new Map(),files=new Map(), handles=new Map(), subtitles=new Map(), currentGroup=null, matchGroup=null, matchCandidates=[], view='all',filter='all',preview=false,cancelled=false,busy=false,playItem=null,playURL=null,subURL=null,toastTimer;
+const defaults={provider:'tmdb',token:'',remember:false,language:'en-US',region:'us',auto:true,autoSchema:1,matchMode:'confident',cache:true};let settings={...defaults};
+const videoExt=/\.(mp4|mkv|webm|m4v|mov|avi|wmv|mpg|mpeg|ts|mts|m2ts|vob|ogv)$/i;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function toast(msg){$('#toast').textContent=msg;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,6500)}
+function openDialog(id){const d=$(id);if(!d.open)d.showModal()}
+$$('[data-close]').forEach(b=>b.onclick=()=>b.closest('dialog').close());
+$$('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const b=d.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)d.close()}}));
+function request(store,method,...args){return new Promise((resolve,reject)=>{if(!db)return resolve(method==='getAll'?[]:undefined);const tx=db.transaction(store,method==='get'||method==='getAll'?'readonly':'readwrite');let result;const q=tx.objectStore(store)[method](...args);q.onsuccess=()=>result=q.result;q.onerror=()=>reject(q.error);tx.oncomplete=()=>resolve(result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Storage transaction aborted'))})}
+async function persist(item){try{await request('items','put',item)}catch(e){toast('Storage is full or unavailable. Export your library to keep a backup.')}}
+function safeImage(v){if(typeof v!=='string')return '';if(/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=\s]+$/.test(v))return v;try{const u=new URL(v);if(u.protocol==='https:')return u.href}catch{}return ''}
+function imageSource(v){return art.get(v)||safeImage(v)}
+function imageTag(v,cls='',alt=''){const u=imageSource(v);return u?`<img src="${escapeHTML(u)}" class="${cls}" alt="${escapeHTML(alt)}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling?.removeAttribute('hidden')">`:''}
+// Filename evidence and ranked metadata matching; scores are heuristics, not probabilities.
+function cleanName(path,folderName='Untitled series'){
+ let base=path.split('/').pop().replace(/\.(?:mp4|mkv|webm|m4v|mov|avi|wmv|mpg|mpeg|ts|mts|m2ts|vob|ogv)$/i,'');
+ base=base.replace(/^(?:https?:\/\/)?(?:www\.)?[a-z0-9][a-z0-9.-]*\.(?:com|org|net|in|mx|to|tv|me|cc|xyz|lol|ws)\b[\s._:-]*/i,'');
+ base=base.replace(/^\[(?!rec\])[^\]]{1,90}\][\s._-]*/i,'');
+ base=base.replace(/^(?:YTS[._ -]?(?:MX|AG|AM|LT)|RARBG|EZTV|TGx|TorrentGalaxy|TamilMV|TamilBlasters|PSA|QxR)[\s._:-]+/i,'');
+ base=base.replace(/[._]/g,' ').replace(/\[(?!rec\])[^\]]*\]/gi,' ');
+ let ep=base.match(/\bS(\d{1,2})\s*E(\d{1,3})(?:\s*E\d{1,3})?/i)||base.match(/\b(\d{1,2})x(\d{2,3})\b/i);
+ const parentParts=path.split('/').slice(0,-1).map(x=>x.replace(/[._]/g,' '));
+ const seasonDirectory=[...parentParts].reverse().map(x=>x.match(/^(?:season|s)\s*(\d{1,2})$/i)).find(Boolean);
+ const expanded=base.match(/\bSeason\s*(\d{1,2})[\s-]*(?:Episode|Ep?|E)\s*(\d{1,3})\b/i);
+ if(!ep&&expanded)ep=expanded;
+ if(!ep){const numbered=base.match(/\b(?:Episode|Ep)\s*(\d{1,3})\b/i);if(numbered){ep=[numbered[0],String(seasonDirectory?.[1]||1),numbered[1]];ep.index=numbered.index}}
+ if(!ep&&(seasonDirectory||(!genericFolder(folderName)&&folderName!=='Untitled series'))){const numbered=base.match(/^(\d{1,3})(?:\s+-\s+|\s*$)/);if(numbered){ep=[numbered[0],String(seasonDirectory?.[1]||1),numbered[1]];ep.index=0}}
+
+ const season=ep||base.match(/\b(?:Season\s*|S)(\d{1,2})\b/i);
+ const years=[...base.matchAll(/\b(19\d{2}|20\d{2})\b/g)].filter(m=>m.index>0&&(!season||m.index<season.index));
+ const year=years.find(m=>base[m.index-1]==='(')||years.at(-1);
+ let cut=base.length;if(season)cut=Math.min(cut,season.index);if(year)cut=Math.min(cut,year.index);
+ const tech=base.search(/\b(?:2160p|1080p|1080i|720p|480p|4k|bluray|blu ray|brrip|bdrip|remux|webrip|web[ -]?dl|hdtv|pdtv|dvdrip|dvdscr|xvid|x26[45]|h\s?26[45]|hevc|av1|aac|ddp?\s?\d|dts|truehd|flac|10\s?bit|8\s?bit|proper|repack|dual\s+audio|multi\s+audio|(?:NF|AMZN|DSNP|ATVP|HMAX)\s+WEB)/i);
+ if(tech>=0)cut=Math.min(cut,tech);
+ let title=base.slice(0,cut).replace(/\([^)]*\)/g,' ').replace(/[\s-]+(?:YIFY|YTS|RARBG|EZTV|TGx|PSA|QxR|ION10|ION265|GalaxyRG|GalaxyTV|EVO|FGT|ETRG|ETTV|Pahe|MeGusta|Judas|Tigole)\s*$/i,'').replace(/[-\s(\[]+$/,'').replace(/\s+/g,' ').trim();
+ let folderYear='';if(!title&&season){const parent=path.split('/').slice(0,-1).reverse().find(s=>!genericFolder(s));const source=parent||(!genericFolder(folderName)?folderName:'Untitled series');const parsedParent=cleanName(source+'.mkv','Untitled series');title=parsedParent.title;folderYear=parsedParent.year}
+ return {title:title||base.trim()||'Untitled video',year:year?.[1]||folderYear,type:season?'tv':'movie',season:season?+season[1]:0,episode:ep?+ep[2]:0};
+}
+function genericFolder(s){return /^(?:season\s*\d+|s\d+|movies?|films?|series|tv(?:\s*shows?)?|shows?|downloads?|videos?|media|selected files|complete|1080p|720p|2160p)$/i.test(s.trim())}
+function titleQueries(g){
+ const queries=[];const add=(s,source)=>{s=String(s||'').replace(/\s+/g,' ').trim();if(s.length>1&&!genericFolder(s)&&!queries.some(q=>norm(q.title)===norm(s)))queries.push({title:s,source})};
+ const x=g.entries?.[0];const folder=folders.find(f=>f.id===x?.folderId);
+ if(x)add(cleanName(x.path,folder?.name||'').title,'filename');
+ add(g.searchTitle||g.title,'saved title');
+ if(x){for(const p of x.path.split('/').slice(0,-1).reverse())if(!genericFolder(p))add(cleanName(p+'.mkv').title,'folder')}
+ if(folder&&!genericFolder(folder.name))add(cleanName(folder.name+'.mkv').title,'folder');
+ for(const q of [...queries]){const parts=q.title.split(/\s+[-–—|]\s+/);if(parts.length>1){add(parts.at(-1),'title fragment');add(parts[0],'title fragment')}}
+ return queries.slice(0,4);
+}
+function titleSimilarity(a,b){
+ a=norm(a).replace(/^(the|a|an) /,'');b=norm(b).replace(/^(the|a|an) /,'');if(!a||!b)return 0;if(a===b)return 1;
+ const aa=new Set(a.split(' ')),bb=new Set(b.split(' '));let intersection=0;for(const t of aa)if(bb.has(t))intersection++;
+ const dice=2*intersection/(aa.size+bb.size);
+ const row=Array.from({length:b.length+1},(_,i)=>i);
+ for(let i=1;i<=a.length;i++){let prev=row[0];row[0]=i;for(let j=1;j<=b.length;j++){const old=row[j];row[j]=Math.min(row[j]+1,row[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=old}}
+ const edit=1-row[b.length]/Math.max(a.length,b.length);
+ const score=Math.max(.6*edit+.4*dice,dice*.96,edit*.98);const an=a.match(/\b\d+\b/g)||[],bn=b.match(/\b\d+\b/g)||[];if(an.join(',')!==bn.join(','))return Math.min(score,.72);return Math.min(score,Math.min(a.length,b.length)<5?.84:1);
+}
+function rankCandidates(g,candidates,queries=titleQueries(g)){
+ const year=g.searchYear||g.year;const unique=new Map();
+ for(const c of candidates){let nameScore=0,evidence;for(const q of queries){const similarity=Math.max(titleSimilarity(q.title,c.title),titleSimilarity(q.title,c.original));const penalty=q.source==='title fragment'?.025:0;if(similarity-penalty>nameScore){nameScore=similarity-penalty;evidence=q}}
+ const delta=year&&c.year?Math.abs(+year-+c.year):null;const episodic=g.entries?.some(e=>e.season||e.episode);
+ const yearScore=delta===null?.6:delta===0?1:delta===1?.8:delta<=3?.4:.05;
+ const typeScore=g.type===c.type?1:0;
+ const score=.78*nameScore+.14*(g.type==='tv'?.85:yearScore)+.08*typeScore;
+ const reason=[nameScore>=.999?'Title matches':nameScore>=.9?'Title very similar':'Title partially matches',delta===0?'Same year':delta===1?'Year differs by 1':delta!==null&&g.type==='movie'?'Year differs by '+delta:'',episodic&&c.type==='tv'?'Episode filename':'',evidence?.source==='folder'?'Folder name agrees':''].filter(Boolean).join(' · ');
+ const ranked={...c,matchScore:score,titleScore:nameScore,yearDelta:delta,reason};const key=c.provider+':'+c.type+':'+c.id;if(!unique.has(key)||unique.get(key).matchScore<score)unique.set(key,ranked)
+ }return [...unique.values()].sort((a,b)=>b.matchScore-a.matchScore||b.titleScore-a.titleScore);
+}
+function strongMatch(g,ranked){const top=ranked[0],best=settings.matchMode==='best';if(!top||top.titleScore<(best?.78:.88)||top.matchScore<(best?.83:.89))return false;if(g.type==='movie'&&top.yearDelta!==null&&top.yearDelta>(best?2:1))return false;return ranked.length===1||top.matchScore-ranked[1].matchScore>=(best?.035:.075)}
+let metadataSearchCache=new Map();
+async function cachedSearch(title,type,year=''){
+ const key=[settings.provider,settings.language,norm(title),type,year].join('|');
+ if(!metadataSearchCache.has(key))metadataSearchCache.set(key,searchMetadata(title,type,year).catch(e=>{metadataSearchCache.delete(key);throw e}));
+ return metadataSearchCache.get(key);
+}
+async function smartSearch(g){
+ const queries=titleQueries(g),all=[];let attempts=0;const year=g.searchYear||g.year;
+ for(const q of queries){if(cancelled||attempts>=6)break;all.push(...await cachedSearch(q.title,g.type,g.type==='movie'?year:''));attempts++;let ranked=rankCandidates(g,all,queries);
+  if(strongMatch(g,ranked))return ranked;
+  if(g.type==='movie'&&year&&attempts<6){all.push(...await cachedSearch(q.title,g.type));attempts++;ranked=rankCandidates(g,all,queries);if(strongMatch(g,ranked))return ranked}
+  await sleep(200);
+ }
+ let ranked=rankCandidates(g,all,queries);
+ if(settings.provider==='tmdb'&&queries.length&&(!ranked.length||ranked[0].titleScore<.85)&&attempts<6&&!g.entries?.some(e=>e.season||e.episode)&&!cancelled){all.push(...await cachedSearch(queries[0].title,g.type==='movie'?'tv':'movie'));ranked=rankCandidates(g,all,queries)}
+ return ranked;
+}
+function canAutoLookup(){return settings.auto&&settings.provider!=='off'&&(settings.provider!=='tmdb'||!!settings.token)}
+function lookupSummary(matched,review,failed){const root=$('#lookupSummary');root.hidden=false;root.innerHTML=`<span>${matched} titles updated automatically · ${review} need review${failed?' · '+failed+' requests failed':''}</span>${review?'<button id="reviewMatches">Review uncertain matches</button>':''}`;const b=$('#reviewMatches');if(b)b.onclick=()=>{$('#statusFilter').value='review';view='all';filter='all';render()}}
+async function lookupAll(options={}){
+ const automatic=options.automatic===true;
+ if(!items.length){if(!automatic)toast('Add a folder first.');return}
+ if(settings.provider==='off'||settings.provider==='tmdb'&&!settings.token){if(!automatic){showSettings();toast('Choose a metadata source and save its settings first.')}return}
+ if(busy){if(!automatic)toast('Wait for the current scan or matching task to finish.');return}
+ inheritSeriesMetadata();metadataSearchCache=new Map();
+ await beginTask('Automatically matching your library…',async()=>{
+  let matched=0,review=0,failed=0;
+  const todo=groups().filter(g=>{
+   if(settings.provider==='tvmaze'&&g.type!=='tv')return false;
+   const incomplete=g.meta&&g.provider===settings.provider&&g.sourceId&&(!g.poster||!g.overview||(g.cast?.length&&g.castImageSchema!==1));
+   if(!g.meta||g.needsMetadata||incomplete){const wait=incomplete?86400000:3600000;return !!(g.cast?.length&&g.castImageSchema!==1)||!automatic||!g.lastMetadataAttempt||Date.now()-g.lastMetadataAttempt>wait}return false;
+  });
+  for(let i=0;i<todo.length;i++){
+   if(cancelled)break;const g=todo[i];$('#taskText').textContent=`Auto-match · ${i+1} / ${todo.length} · ${g.searchTitle||g.title}`;
+   try{
+    let chosen;
+    // A known provider ID is refreshed directly, never replaced by a new guess.
+    if(g.meta&&g.provider===settings.provider&&g.sourceId)chosen={provider:g.provider,id:g.sourceId,type:g.type};
+    else{const ranked=await smartSearch(g);if(cancelled)break;if(strongMatch(g,ranked))chosen=ranked[0];
+     else{for(const x of g.entries){x.review=true;x.lookupError='';x.suggestions=ranked.slice(0,3);x.reviewReason=ranked.length?'The top guesses are too close or weak to choose reliably. Review the suggested releases.':'No metadata candidates found. Try another title or folder name.';await persist(x)}review++}
+    }
+    if(chosen){await applyMetadata(g,chosen);matched++;for(const x of g.entries){x.reviewReason='';x.lookupError='';x.suggestions=[];x.review=false;await persist(x)}}
+   }catch(e){failed++;for(const x of g.entries){x.lookupError=e.message;await persist(x)}if(/credential|rejected/.test(e.message))throw e;toast(e.message)}
+   finally{for(const x of g.entries){x.lastMetadataAttempt=Date.now();await persist(x)}}
+   await sleep(250);
+  }
+  inheritSeriesMetadata();lookupSummary(matched,review,failed);if(todo.length)toast(`${matched} matched automatically · ${review} need review${failed?' · '+failed+' failed':''}.`);
+ });
+}
+
+function renderMatchResults(candidates,status){
+ matchCandidates=candidates;$('#matchStatus').textContent=status;
+ $('#matchResults').innerHTML=candidates.slice(0,15).map((c,i)=>`<button class="match-result" data-candidate="${i}">${imageTag(c.poster)}<span><strong>${escapeHTML(c.title)}</strong><small>${escapeHTML(c.year||'Unknown year')} · ${c.type==='tv'?'Series':'Film'}</small>${c.matchScore!==undefined?`<small class="gold">Match score ${Math.round(c.matchScore*100)}/100 · ${escapeHTML(c.reason)}</small>`:''}<small>${escapeHTML(c.overview?.slice(0,150)||'No synopsis')}</small></span></button>`).join('');
+ $('#matchResults').querySelectorAll('[data-candidate]').forEach(b=>b.onclick=async()=>{const candidate=candidates[+b.dataset.candidate];$$('#matchResults button').forEach(button=>button.disabled=true);$('#matchStatus').textContent='Saving metadata and artwork…';try{const g=findGroup(matchGroup);if(!g)throw new Error('This title has changed. Reopen its details.');await applyMetadata(g,candidate);for(const x of g.entries){x.suggestions=[];x.lookupError='';x.reviewReason='';await persist(x)}$('#matchDialog').close();matchGroup=groupKey(g.entries[0]);showDetail(matchGroup);toast('Title matched and saved.')}catch(e){$('#matchStatus').textContent=e.message;$$('#matchResults button').forEach(button=>button.disabled=false)}});
+}
+function showMatch(key){matchGroup=key;const g=findGroup(key);$('#matchQuery').value=titleQueries(g)[0]?.title||g.title;$('#matchType').value=g.type;$('#matchFile').textContent=g.entries[0].path;renderMatchResults(g.suggestions||[],g.suggestions?.length?'Suggested matches from your last scan. Scores are matching heuristics, not probabilities.':g.lookupError||g.reviewReason||'Search with a cleaned title, then select the correct release.');openDialog('#matchDialog')}
+let searchSerial=0;
+$('#matchForm').onsubmit=async e=>{e.preventDefault();const serial=++searchSerial;const query=$('#matchQuery').value.trim();if(!query)return;$('#matchStatus').textContent='Searching…';$('#matchResults').innerHTML='';try{const g=findGroup(matchGroup);const candidates=await searchMetadata(query,$('#matchType').value);if(serial!==searchSerial)return;const ranked=rankCandidates({...g,type:$('#matchType').value},candidates,[{title:query,source:'typed title'}]);renderMatchResults(ranked,ranked.length?'Choose the correct title and release year. Scores measure title evidence, not certainty.':'No matches. Try another title or add details manually.')}catch(e){$('#matchStatus').textContent=e.message}};
+
+function seriesSignature(x){
+ const folder=folders.find(f=>f.id===x.folderId);const parsed=cleanName(x.path,folder?.name||'');
+ const name=norm(parsed.title||x.searchTitle||x.title);let contextYear='';
+ for(const segment of x.path.split('/').slice(0,-1).reverse())if(!genericFolder(segment)){const p=cleanName(segment+'.mkv');if(norm(p.title)===name){contextYear=p.year;break}}
+ if(!contextYear&&folder){const p=cleanName(folder.name+'.mkv');if(norm(p.title)===name)contextYear=p.year}
+ return name+':'+contextYear;
+}
+function providerSeriesKey(x){return x.type==='tv'&&x.meta&&['tmdb','tvmaze'].includes(x.provider)&&x.sourceId?(x.imdb?'tv:imdb:'+x.imdb:'tv:'+x.provider+':'+x.sourceId):''}
+function buildSeriesIndex(){const index=new Map();for(const i of items){const key=providerSeriesKey(i);if(!key)continue;const signature=seriesSignature(i);if(!index.has(signature))index.set(signature,new Set());index.get(signature).add(key)}return index}
+function groupKey(x,index=buildSeriesIndex()){
+ if(x.type!=='tv')return x.id;const known=providerSeriesKey(x);if(known)return known;
+ const signature=seriesSignature(x),confirmed=[...(index.get(signature)||[])];
+ return confirmed.length===1?confirmed[0]:'tv:name:'+signature;
+}
+const metadataFields=['attributions','metadataFetchedAt','title','year','type','overview','genres','rating','runtime','poster','backdrop','cast','director','provider','sourceId','imdb','sourceURL','meta','castImageSchema'];
+function inheritSeriesMetadata(){
+ const known=new Map();for(const x of items){if(x.type!=='tv'||!x.meta)continue;const signature=seriesSignature(x);if(!known.has(signature))known.set(signature,[]);known.get(signature).push(x)}
+ for(const x of items.filter(x=>x.type==='tv'&&!x.meta)){
+  const siblings=known.get(seriesSignature(x))||[],identities=new Set(siblings.map(i=>providerSeriesKey(i)||'manual:'+norm(i.title)));
+  if(identities.size===1&&siblings.length){const sibling=siblings.find(i=>i.poster)||siblings[0];for(const k of metadataFields)if(sibling[k]!==undefined)x[k]=sibling[k];x.review=false;x.reviewReason='';x.lookupError='';persist(x)}
+ }
+}
+function groups(){
+ if(!items.length&&preview)return PREVIEW.map(p=>({...p,preview:true,entries:[],key:p.id}));
+ const map=new Map(),seriesIndex=buildSeriesIndex();for(const x of items){const key=groupKey(x,seriesIndex);if(!map.has(key))map.set(key,[]);map.get(key).push(x)}
+ return [...map].map(([key,entries])=>{entries.sort((a,b)=>a.season-b.season||a.episode-b.episode||a.path.localeCompare(b.path,undefined,{numeric:true}));const representative=entries.find(e=>e.meta&&e.poster&&e.overview)||entries.find(e=>e.meta)||entries[0];return {...representative,key,entries,favorite:entries.some(i=>i.favorite),added:Math.max(...entries.map(i=>i.added||0)),lastPlayed:Math.max(...entries.map(i=>i.lastPlayed||0)),needsMetadata:entries.some(i=>!i.meta)}});
+}
+function entryToPlay(g){return [...g.entries].filter(e=>e.position>0&&!e.watched).sort((a,b)=>(b.lastPlayed||0)-(a.lastPlayed||0))[0]||g.entries.find(e=>!e.watched)||g.entries[0]}
+function localFileRow(x,tv){return `<div class="file-row"><div class="file-label"><strong>${tv?episodeLabel(x)+' · ':''}${escapeHTML(x.name)}</strong><small>${escapeHTML(x.path)} · ${formatSize(x.size)}${x.watched?' · Watched':x.position?' · Resume at '+Math.floor(x.position/60)+'m':''}${!isAvailable(x)?' · Reconnect to play':''}</small></div><button data-play="${escapeHTML(x.id)}">${ico('play')}Play</button><button data-watch="${escapeHTML(x.id)}" aria-label="${x.watched?'Mark unwatched':'Mark watched'}">${ico(x.watched?'check':'plus')}</button></div>`}
+function renderLocalFiles(g){
+ if(!g.entries.length)return '';
+ if(g.type!=='tv')return '<h3 class="subtle-title">Local file</h3>'+g.entries.map(x=>localFileRow(x,false)).join('');
+ const seasons=[...new Set(g.entries.map(e=>e.season||0))].sort((a,b)=>a-b),selected=entryToPlay(g)?.season||seasons[0];
+ return `<div class="row between" style="margin:24px 0 12px"><h3 style="margin:0">Episodes <span class="small muted">· ${g.entries.length} total</span></h3><select id="seasonSelect" aria-label="Choose season">${seasons.map(s=>`<option value="${s}" ${s===selected?'selected':''}>${s?'Season '+s:'Other episodes'}</option>`).join('')}</select></div><div id="episodeRows">${g.entries.filter(x=>(x.season||0)===selected).map(x=>localFileRow(x,true)).join('')}</div>`;
+}
+function bindLocalFiles(g){
+ const root=$('#detailBody');root.querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>play(items.find(x=>x.id===b.dataset.play)));
+ root.querySelectorAll('[data-watch]').forEach(b=>b.onclick=async()=>{const x=items.find(x=>x.id===b.dataset.watch);x.watched=!x.watched;if(!x.watched)x.position=0;await persist(x);render();showDetail(g.key)});
+ const season=$('#seasonSelect');if(season)season.onchange=()=>{$('#episodeRows').innerHTML=g.entries.filter(x=>(x.season||0)===+season.value).map(x=>localFileRow(x,true)).join('');bindLocalFiles(g)};
+}
+
+function findGroup(key){return groups().find(g=>g.key===key)}
+function formatSize(n){return n>1e9?(n/1e9).toFixed(1)+' GB':(n/1e6).toFixed(1)+' MB'}
+function episodeLabel(x){return x.season||x.episode?`S${String(x.season).padStart(2,'0')} · E${String(x.episode).padStart(2,'0')}`:'Video'}
+function card(g,rail=false){const e=g.entries.find(x=>x.position>0&&!x.watched)||g.entries[0];const progress=e?.duration?Math.min(100,e.position/e.duration*100):0;return `<article class="film"><button class="poster" data-detail="${escapeHTML(g.key)}" aria-label="Details for ${escapeHTML(g.title)}">${imageTag(rail?(g.backdrop||g.poster):g.poster)}<div class="poster-fallback" ${imageSource(rail?(g.backdrop||g.poster):g.poster)?'hidden':''}>${ico('film')}<span>${escapeHTML(g.title)}</span></div><span class="poster-hover"><span>${ico('info')}</span></span>${!g.preview&&!g.meta?'<span class="tag">'+(g.review?'Review match':'Needs metadata')+'</span>':''}${progress?`<span class="progress"><i style="width:${progress}%"></i></span>`:''}</button><button class="film-heart ${g.favorite?'saved':''}" data-heart="${escapeHTML(g.key)}" aria-label="${g.favorite?'Remove from':'Add to'} My list: ${escapeHTML(g.title)}" aria-pressed="${!!g.favorite}">${ico(g.favorite?'check':'heart')}</button><div class="film-title">${escapeHTML(g.title)}</div><p class="film-sub">${escapeHTML(g.year||'Year unknown')}${g.type==='tv'?' · '+(g.preview?'Series':g.entries.length+' episode'+(g.entries.length!==1?'s':'')):''}${g.rating?' · ★ '+Number(g.rating).toFixed(1):''}</p></article>`}
+function bindCards(root){root.querySelectorAll('[data-detail]').forEach(b=>b.onclick=()=>showDetail(b.dataset.detail));root.querySelectorAll('[data-heart]').forEach(b=>b.onclick=()=>toggleFavorite(b.dataset.heart))}
+const failedHeroImages=new Set();let heroArtKey='';
+function heroChoices(all){
+ const real=items.length?all.filter(g=>!g.preview):[];
+ const recent=[...real].filter(g=>g.lastPlayed>0).sort((a,b)=>b.lastPlayed-a.lastPlayed);
+ const added=[...real].sort((a,b)=>b.added-a.added||a.title.localeCompare(b.title));
+ const choices=[],seen=new Set();const add=(g,source)=>{const url=imageSource(source);if(url&&!failedHeroImages.has(url)&&!seen.has(url)){seen.add(url);choices.push({group:g,url})}};
+ for(const g of recent){add(g,g.backdrop);add(g,g.poster)}
+ for(const g of added)add(g,g.backdrop);
+ for(const g of added)add(g,g.poster);
+ return {choices,fallback:recent[0]||added[0]||null};
+}
+function renderHero(all){
+ const {choices,fallback}=heroChoices(all),choice=choices[0],first=choice?.group||fallback;
+ const hero=$('#hero');hero.classList.toggle('has-library',!!first);hero.dataset.featuredId=first?.key||'';
+ const url=choice?.url||'';
+ if(url!==heroArtKey){heroArtKey=url;hero.querySelector('.featured-art')?.remove();if(url){const img=new Image();img.className='featured-art';img.alt='';img.setAttribute('aria-hidden','true');img.onerror=()=>{failedHeroImages.add(url);if(heroArtKey===url){heroArtKey='';img.remove();renderHero(groups())}};img.src=url;hero.prepend(img)}}
+ if(!first){$('#heroContent').innerHTML=`<h1>Your cinema.<br>Your rules.</h1><p>All your films and series. One beautiful place.</p><div class="row wrap"><button class="primary" id="heroAdd">${ico('folder')}Add your first folder</button><button class="ghost" id="heroHelp">${ico('info')}How it works</button></div><div class="hero-note">${ico('folder')}Choose a folder to start your collection.</div>`;$('#heroAdd').onclick=addFolder;$('#heroHelp').onclick=()=>openDialog('#helpDialog');return}
+ const entry=entryToPlay(first);
+ $('#heroContent').innerHTML=`<div class="hero-meta">${escapeHTML(first.year||'Your local collection')} &nbsp; · &nbsp; ${first.type==='tv'?'Series':'Film'}${first.genres?.length?' &nbsp; · &nbsp; '+escapeHTML(first.genres.slice(0,2).join(' / ')):''}</div><h1>${escapeHTML(first.title)}</h1><p>${escapeHTML(first.overview||'Your next great watch is already here. Add metadata to discover the story, cast, and characters.')}</p><div class="row wrap"><button class="primary" id="heroPlay">${ico('play')}${entry?.position&&!entry.watched?'Resume':'Play'}</button><button class="ghost" id="heroDetails">${ico('info')}More info</button></div><div class="hero-note">${ico('folder')}${first.lastPlayed?'Recently played · ':''}${items.length} video${items.length!==1?'s':''} · ${folders.length} folder${folders.length!==1?'s':''} · Stored on your computer</div>`;
+ $('#heroPlay').onclick=()=>play(entry);$('#heroDetails').onclick=()=>showDetail(first.key);
+}
+
+function render(){const all=groups();renderHero(all);const isPreview=!items.length&&preview;$('#libraryTools').hidden=!items.length;$('#notice').innerHTML=isPreview?`<div class="row">${ico('spark')}<span>Your local collection.</span></div><button id="noticeAction">Preview library ${ico('arrow')}</button>`:`<div class="row">${ico('folder')}<span>${items.length?items.filter(isAvailable).length+' of '+items.length+' videos connected. '+(items.some(x=>!isAvailable(x))?'Reconnect folders to play saved videos.':'Ready when you are.'):'Your collection starts with a folder.'}</span></div><button id="noticeAction">${items.length?'Manage folders':'Add a folder'} ${ico('arrow')}</button>`;$('#noticeAction').onclick=()=>isPreview?showDetail(all[0].key):items.length?showSettings():addFolder();let shown=all;const q=$('#search').value.toLocaleLowerCase().trim();const type=['movie','tv'].includes(view)?view:['movie','tv'].includes(filter)?filter:null;if(type)shown=shown.filter(x=>x.type===type);if(view==='list')shown=shown.filter(x=>x.favorite);if(q)shown=shown.filter(x=>[x.title,x.year,...(x.genres||[]),...(x.cast||[]).flatMap(c=>[c.name,c.character]),...x.entries.map(e=>e.path)].join(' ').toLocaleLowerCase().includes(q));const genre=$('#genre').value;if(genre)shown=shown.filter(g=>g.genres?.includes(genre));const status=$('#statusFilter').value;if(status)shown=shown.filter(g=>status==='unmatched'?!g.meta:status==='review'?g.review:status==='watched'?g.entries.every(e=>e.watched):g.entries.some(e=>!isAvailable(e)));const sort=$('#sort').value;shown.sort((a,b)=>sort==='title'?a.title.localeCompare(b.title):sort==='year'?(+b.year||0)-(+a.year||0):sort==='rating'?(b.rating||0)-(a.rating||0):(b.added||0)-(a.added||0));$('#collectionTitle').textContent=view==='list'?'My list':view==='movie'?'Movie night':view==='tv'?'One more episode':'The collection';$('#count').textContent=(isPreview?'Preview · ':'')+shown.length+' title'+(shown.length!==1?'s':'');$('#posters').innerHTML=shown.map(g=>card(g)).join('');bindCards($('#posters'));$('#empty').hidden=!!shown.length;if(!shown.length){$('#empty').innerHTML=ico('film')+`<h3>${q||genre||status?'Nothing here just yet.':view==='list'?'Save something for later.':'Make room for movie night.'}</h3><p>${q||genre||status?'Try a different search or clear your filters.':view==='list'?'Use the heart on a title to add it to My list.':'Add a video folder and build your own collection.'}</p><button id="emptyAction">${q||genre||status?'Clear filters':view==='list'?'Explore the collection':'Add a folder'}</button>`;$('#emptyAction').onclick=()=>{if(q||genre||status){$('#search').value='';$('#genre').value='';$('#statusFilter').value='';setView('all');filter='all';$$('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));render()}else if(view==='list')setView('all');else addFolder()}}const continuing=all.filter(g=>g.entries.some(e=>e.position>5&&!e.watched));$('#continueSection').hidden=view!=='all'||!continuing.length||!!q;$('#continueRail').innerHTML=continuing.map(g=>card(g,true)).join('');bindCards($('#continueRail'));const genres=[...new Set(items.flatMap(i=>i.genres||[]))].sort();$('#genre').innerHTML='<option value="">All genres</option>'+genres.map(g=>`<option ${g===genre?'selected':''}>${escapeHTML(g)}</option>`).join('');$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$$('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===(type||'all')))}
+function setView(v){view=v;filter='all';render()}
+async function toggleFavorite(key){const g=findGroup(key);if(g.preview){toast('Preview titles are examples. Add your own videos to create a watchlist.');return}for(const x of g.entries){x.favorite=!g.favorite;await persist(x)}render();if($('#detailDialog').open)showDetail(key)}
+async function beginTask(label,fn){if(busy){toast('A scan or lookup is already running.');return}busy=true;cancelled=false;$('#taskbar').hidden=false;$('#taskText').textContent=label;try{await fn()}catch(e){toast(e.message||'Something went wrong. Please try again.')}finally{busy=false;$('#taskbar').hidden=true;render()}}
+$('#cancelTask').onclick=()=>{cancelled=true;$('#taskText').textContent='Stopping after the current file…'};
+async function addFolder(){if(busy){toast('Finish or cancel the current scan first.');return}if(window.showDirectoryPicker){try{const handle=await window.showDirectoryPicker({mode:'read'});let folder;for(const f of folders){if(f.handle&&await f.handle.isSameEntry(handle)){folder=f;break}}if(!folder)folder=folders.find(f=>!f.handle&&f.name===handle.name);if(!folder){folder={id:crypto.randomUUID(),name:handle.name,added:Date.now()};folders.push(folder)}folder.handle=handle;await request('folders','put',folder);await scanHandle(folder);showFolderList();return}catch(e){if(e.name==='AbortError')return;if(e.name!=='SecurityError'&&e.name!=='NotAllowedError'&&e.name!=='TypeError'){toast('Folder access failed: '+e.message);return}toast('Using the folder selection fallback. Re-select it after reopening.')}}$('#folderInput').value='';$('#folderInput').click()}
+async function scanHandle(folder){await beginTask('Scanning '+folder.name+'…',async()=>{if(await folder.handle.queryPermission({mode:'read'})!=='granted'){if(await folder.handle.requestPermission({mode:'read'})!=='granted')throw new Error('Folder permission was not granted.')}let count=0,seen=new Set();async function walk(dir,path=''){for await(const [name,h]of dir.entries()){if(cancelled)return;const p=path?path+'/'+name:name;if(h.kind==='directory'){await walk(h,p)}else if(videoExt.test(name)||/\.(srt|vtt)$/i.test(name)){try{const file=await h.getFile();if(videoExt.test(name)){const id=await ingestFile(folder,p,file,h);seen.add(id);count++;$('#taskText').textContent=`Scanning ${folder.name} · ${count} videos`}else subtitles.set(folder.id+'/'+p,file)}catch(e){toast('Could not read '+name+': '+e.message)}}}}await walk(folder.handle);if(!cancelled){for(const x of items.filter(i=>i.folderId===folder.id&&!seen.has(i.id))){files.delete(x.id);handles.delete(x.id);disconnectedFiles.add(x.id)}folder.scanned=Date.now();await request('folders','put',folder)}toast(`${count} video${count===1?'':'s'} found${cancelled?' · scan stopped':''}.`)});if(canAutoLookup()&&!cancelled)await lookupAll({automatic:true})}
+async function ingestFile(folder,path,file,handle){const id=folder.id+'/'+path;const parsed=cleanName(path,folder.name);let x=items.find(i=>i.id===id);if(!x){x={id,folderId:folder.id,path,name:file.name,size:file.size,modified:file.lastModified,searchTitle:parsed.title,searchYear:parsed.year,...parsed,added:Date.now(),favorite:false,position:0,duration:0,watched:false};items.push(x)}else{if(x.size!==file.size||x.modified!==file.lastModified){x.position=0;x.duration=0;x.watched=false}x.size=file.size;x.modified=file.lastModified}files.set(id,file);disconnectedFiles.delete(id);if(handle){handles.set(id,handle);connectedFolders.add(folder.id)}inheritSeriesMetadata();await persist(x);preview=false;return id}
+async function importFiles(list,loose=false){if(!list.length)return;await beginTask('Reading your videos…',async()=>{const folderMap=new Map();for(const file of list){if(cancelled)break;const relative=file.webkitRelativePath||file.name;const root=loose?'Selected files':relative.split('/')[0];let folder=folderMap.get(root);if(!folder){folder=folders.find(f=>f.name===root&&!f.handle);if(!folder){folder={id:crypto.randomUUID(),name:root,added:Date.now(),fallback:true};folders.push(folder)}folderMap.set(root,folder);await request('folders','put',folder)}const path=loose?file.name:relative.split('/').slice(1).join('/')||file.name;if(videoExt.test(file.name))await ingestFile(folder,path,file);else if(/\.(srt|vtt)$/i.test(file.name))subtitles.set(folder.id+'/'+path,file)}toast('Folder scan complete. '+items.length+' videos in your library.')});showFolderList();if(canAutoLookup()&&!cancelled)await lookupAll({automatic:true})}
+$('#folderInput').onchange=e=>importFiles([...e.target.files]);$('#fileInput').onchange=e=>importFiles([...e.target.files],true);
+function showFolderList(){const container=$('#folderList');container.innerHTML=folders.length?folders.map(f=>`<div class="folder-row"><div class="row">${ico('folder')}<div class="folder-name"><strong class="small">${escapeHTML(f.name)}</strong><div class="small muted">${items.filter(i=>i.folderId===f.id).length} videos · ${f.handle?'Remembered folder':'Select again after reopening'}</div></div></div><div class="row"><button data-scan="${escapeHTML(f.id)}">${f.handle?'Reconnect / rescan':'Select again'}</button><button data-remove="${escapeHTML(f.id)}" class="danger">Remove</button></div></div>`).join(''):'<p class="small muted">No folders yet. Your next favorite film might already be on your drive.</p>';container.querySelectorAll('[data-scan]').forEach(b=>b.onclick=async()=>{if(busy){toast('Finish the current task first.');return}const f=folders.find(x=>x.id===b.dataset.scan);if(f.handle)await scanHandle(f);else await addFolder()});container.querySelectorAll('[data-remove]').forEach(b=>b.onclick=async()=>{if(busy){toast('Finish the current task before removing a folder.');return}const f=folders.find(x=>x.id===b.dataset.remove);if(!confirm(`Remove “${f.name}” and its saved entries from FRAME? Your files stay on disk.`))return;for(const x of items.filter(i=>i.folderId===f.id)){files.delete(x.id);handles.delete(x.id);await request('items','delete',x.id)}items=items.filter(i=>i.folderId!==f.id);folders=folders.filter(x=>x.id!==f.id);await request('folders','delete',f.id);preview=false;showFolderList();render()})}
+function showSettings(){showFolderList();$('#provider').value=settings.provider;$('#apiToken').value=settings.token;$('#rememberToken').checked=settings.remember;$('#language').value=settings.language;$('#region').value=settings.region;$('#autoLookup').checked=settings.auto;$('#matchMode').value=settings.matchMode;$('#cacheArt').checked=settings.cache;$('#connectionStatus').textContent='';providerChanged();openDialog('#settingsDialog')}
+function providerChanged(){$('#tokenField').hidden=$('#provider').value!=='tmdb';$('#rememberToken').closest('label').hidden=$('#provider').value!=='tmdb'}
+$('#provider').onchange=providerChanged;
+function readSettings(){return {provider:$('#provider').value,token:$('#apiToken').value.trim().replace(/^Bearer\s+/i,''),remember:$('#rememberToken').checked,language:$('#language').value.trim()||'en-US',region:$('#region').value.trim().toLowerCase().replace(/[^a-z]/g,'').slice(0,2)||'us',auto:$('#autoLookup').checked,autoSchema:1,matchMode:$('#matchMode').value,cache:$('#cacheArt').checked}}
+$('#saveSettings').onclick=async()=>{settings=readSettings();await request('settings','put',{id:'preferences',...settings,token:settings.remember?settings.token:''});toast('Settings saved.');$('#settingsDialog').close();if(canAutoLookup()&&!busy)lookupAll({automatic:true})};
+async function getJSON(url,headers={}){for(let attempt=0;attempt<3;attempt++){let r;try{r=await fetch(url,{headers,signal:AbortSignal.timeout(18000)})}catch(e){throw new Error('Could not reach the metadata service. Check your connection or browser access.')}if(r.status===429&&attempt<2){await sleep(Math.min(6000,1000*(attempt+1)));continue}if(!r.ok)throw new Error(r.status===401?'TMDB rejected the credential. Check your API key or Read Access Token.':r.status===429?'Metadata service is busy. Please try again later.':'Metadata service returned HTTP '+r.status);return r.json()}}
+function tmdb(path,params={},prefs=settings){if(!prefs.token)throw new Error('Add your TMDB credential in Settings, or choose TVmaze for series.');const u=new URL('https://api.themoviedb.org/3/'+path);u.searchParams.set('language',prefs.language);for(const[k,v]of Object.entries(params))if(v!==undefined&&v!=='')u.searchParams.set(k,v);const headers={accept:'application/json'};if(/^[a-f0-9]{32}$/i.test(prefs.token))u.searchParams.set('api_key',prefs.token);else headers.Authorization='Bearer '+prefs.token;return getJSON(u.href,headers)}
+$('#testConnection').onclick=async()=>{const b=$('#testConnection');b.disabled=true;$('#connectionStatus').textContent='Connecting…';try{const s=readSettings();if(s.provider==='off')throw new Error('Offline mode selected.');if(s.provider==='tmdb')await tmdb('configuration',{},s);else await getJSON('https://api.tvmaze.com/shows/1');$('#connectionStatus').textContent='Connected successfully.'}catch(e){$('#connectionStatus').textContent=e.message}finally{b.disabled=false}};
+function stripHTML(value){const d=new DOMParser().parseFromString(value||'','text/html');return d.body.textContent||''}
+function norm(s){return String(s).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()}
+async function searchMetadata(query,type,year=''){if(settings.provider==='off')throw new Error('Choose an online metadata source in Settings.');if(settings.provider==='tvmaze'){if(type!=='tv')throw new Error('TVmaze covers series only. Choose TMDB for films.');const data=await getJSON('https://api.tvmaze.com/search/shows?q='+encodeURIComponent(query));return data.map(x=>({id:x.show.id,title:x.show.name,year:x.show.premiered?.slice(0,4)||'',poster:x.show.image?.medium||'',overview:stripHTML(x.show.summary),provider:'tvmaze',type:'tv'}))}const data=await tmdb('search/'+type,{query,include_adult:'false',...(year?(type==='movie'?{year}:{first_air_date_year:year}):{})});return data.results.map(x=>({id:x.id,title:x.title||x.name,original:x.original_title||x.original_name,year:(x.release_date||x.first_air_date||'').slice(0,4),poster:x.poster_path?'https://image.tmdb.org/t/p/w342'+x.poster_path:'',overview:x.overview,provider:'tmdb',type}))}
+async function metadataDetails(candidate){if(candidate.provider==='tvmaze'){const d=await getJSON(`https://api.tvmaze.com/shows/${candidate.id}?embed=cast`);return {title:d.name,year:d.premiered?.slice(0,4)||'',type:'tv',overview:stripHTML(d.summary),genres:d.genres||[],rating:d.rating?.average||0,runtime:d.averageRuntime||d.runtime||0,poster:d.image?.original||d.image?.medium||'',backdrop:'',cast:(d._embedded?.cast||[]).slice(0,16).map(c=>({name:c.person.name,character:c.character.name,image:c.person.image?.medium||c.person.image?.original||'',personId:c.person.id})),castImageSchema:1,provider:'tvmaze',sourceId:d.id,imdb:d.externals?.imdb||'',sourceURL:'https://www.tvmaze.com/shows/'+d.id,meta:true,review:false}}
+const d=await tmdb(candidate.type+'/'+candidate.id,{append_to_response:'credits,external_ids'});if(settings.language!=='en-US'&&(!d.overview||!d.poster_path)){const fallback=await tmdb(candidate.type+'/'+candidate.id,{}, {...settings,language:'en-US'});d.overview=d.overview||fallback.overview;d.poster_path=d.poster_path||fallback.poster_path;d.backdrop_path=d.backdrop_path||fallback.backdrop_path}return {title:d.title||d.name,year:(d.release_date||d.first_air_date||'').slice(0,4),type:candidate.type,overview:d.overview||'',genres:(d.genres||[]).map(g=>g.name),rating:d.vote_average||0,runtime:d.runtime||d.episode_run_time?.[0]||0,poster:d.poster_path?'https://image.tmdb.org/t/p/w342'+d.poster_path:'',backdrop:d.backdrop_path?'https://image.tmdb.org/t/p/w1280'+d.backdrop_path:'',cast:(d.credits?.cast||[]).slice(0,16).map(c=>({name:c.name,character:c.character,image:c.profile_path?'https://image.tmdb.org/t/p/w185'+c.profile_path:'',personId:c.id})),castImageSchema:1,director:(d.credits?.crew||[]).find(c=>c.job==='Director')?.name||'',provider:'tmdb',sourceId:d.id,imdb:d.imdb_id||d.external_ids?.imdb_id||'',sourceURL:`https://www.themoviedb.org/${candidate.type}/${d.id}`,meta:true,review:false}}
+// Provider content is separate from FRAME's software license.
+const artDates=new Map();
+const CACHE_MAX_AGE=150*24*60*60*1000;
+const BACKUP_NOTICES={softwareLicense:'LicenseRef-FRAME-Personal-Noncommercial-1.0',tvmaze:{source:'https://www.tvmaze.com/',license:'https://creativecommons.org/licenses/by-sa/4.0/',changes:'Selected fields normalized; HTML summaries converted to text. Per-item modified flags identify user edits. Share distributed adaptations of TVmaze data under CC BY-SA 4.0. The software noncommercial restriction does not apply to that data.'},tmdb:'TMDB content and image cache are excluded. Provider identifiers are retained to permit a fresh lookup using your own credential.'};
+function isExpired(time){return !Number.isFinite(Number(time))||Number(time)<=0||Number(time)>Date.now()||Date.now()-Number(time)>=CACHE_MAX_AGE}
+function isTMDBImage(url){try{return new URL(url).hostname==='image.tmdb.org'}catch{return false}}
+function attributionsFor(x){
+ const entries=Array.isArray(x.attributions)?x.attributions.slice(0,8):[];
+ const result=[];
+ for(const a of [...entries,{provider:x.provider,url:x.sourceURL}]){
+  if(!a||!['tmdb','tvmaze'].includes(a.provider))continue;
+  let url='';try{const u=new URL(a.url);if(u.protocol==='https:'&&u.hostname===(a.provider==='tmdb'?'www.themoviedb.org':'www.tvmaze.com'))url=u.href}catch{}
+  if(!url)url=a.provider==='tmdb'?'https://www.themoviedb.org/':'https://www.tvmaze.com/';
+  if(!result.some(r=>r.provider===a.provider&&r.url===url))result.push({provider:a.provider,url,license:a.provider==='tvmaze'?'https://creativecommons.org/licenses/by-sa/4.0/':'https://www.themoviedb.org/api-terms-of-use',modified:!!a.modified});
+ }
+ return result;
+}
+function hasTMDBData(x){return x.provider==='tmdb'||attributionsFor(x).some(a=>a.provider==='tmdb')}
+function attributionHTML(x){return attributionsFor(x).map(a=>'<br>Source: <a href="'+escapeHTML(a.url)+'" target="_blank" rel="noopener noreferrer">'+(a.provider==='tvmaze'?'TVmaze':'TMDB')+'</a> · <a href="'+a.license+'" target="_blank" rel="noopener noreferrer">'+(a.provider==='tvmaze'?'CC BY-SA 4.0':'Provider terms')+'</a> · '+(a.modified?'Edited by user':'Selected fields normalized')).join('')}
+function withoutTMDBData(x){
+ const y={...x};if(!hasTMDBData(y))return y;
+ const parsed=cleanName(y.path||y.name||'',folders.find(f=>f.id===y.folderId)?.name||'');
+ for(const k of ['overview','genres','rating','runtime','poster','backdrop','cast','director','imdb','castImageSchema'])delete y[k];
+ y.title=y.searchTitle||parsed.title;y.year=y.searchYear||parsed.year||'';
+ y.metadataFetchedAt=0;y.attributions=attributionsFor(y).filter(a=>a.provider!=='tmdb');
+ // Keep the match identity, progress and original local filename for a fresh lookup.
+ if(y.sourceId){y.provider='tmdb';y.meta=true;y.sourceURL=`https://www.themoviedb.org/${y.type==='tv'?'tv':'movie'}/${Number(y.sourceId)}`}else{y.provider='';y.meta=false;y.sourceURL=''}
+ return y;
+}
+function backupItem(x){return hasTMDBData(x)?withoutTMDBData(x):{...x,attributions:attributionsFor(x)}}
+async function expireProviderData(){
+ for(const x of items){if(hasTMDBData(x)&&isExpired(x.metadataFetchedAt)&&(x.metadataFetchedAt||x.poster||x.overview||x.cast?.length||x.genres?.length||x.rating||x.runtime||x.director||x.imdb)){
+  const clean=withoutTMDBData(x);for(const key of Object.keys(x))delete x[key];Object.assign(x,clean);await persist(x);
+ }}
+ for(const [url] of art){if(isTMDBImage(url)&&isExpired(artDates.get(url))){art.delete(url);artDates.delete(url);await request('art','delete',url)}}
+}
+
+async function cacheImage(url){if(!settings.cache||!url||art.has(url))return;try{const response=await fetch(url,{signal:AbortSignal.timeout(12000)});if(!response.ok)return;const blob=await response.blob();if(blob.size>5e6||!/^image\/(jpeg|png|webp)/.test(blob.type))return;const data=await blobToData(blob);const cachedAt=Date.now();await request('art','put',{id:url,data,cachedAt});art.set(url,data);artDates.set(url,cachedAt)}catch{}}
+function blobToData(blob){return new Promise((r,j)=>{const f=new FileReader();f.onload=()=>r(f.result);f.onerror=()=>j(f.error);f.readAsDataURL(blob)})}
+async function applyMetadata(g,candidate){const data=await metadataDetails(candidate);data.metadataFetchedAt=Date.now();data.attributions=attributionsFor(data);for(const x of g.entries){Object.assign(x,data);await persist(x)}await Promise.allSettled([cacheImage(data.poster),cacheImage(data.backdrop)]);for(let i=0;i<(data.cast?.length||0);i+=4)await Promise.allSettled(data.cast.slice(i,i+4).map(c=>cacheImage(c.image)));render()}
+function showDetail(key){const g=findGroup(key);if(!g)return;currentGroup=key;const entry=entryToPlay(g);const q=encodeURIComponent(g.title+(g.year?' '+g.year:''));$('#detailBody').innerHTML=`<div class="detail-layout">${imageSource(g.poster)?imageTag(g.poster,'detail-cover',g.title):'<div class="detail-cover poster-fallback">'+ico('film')+'</div>'}<div><h2 class="detail-title" id="detailHeading">${escapeHTML(g.title)}</h2><div class="detail-meta">${escapeHTML(g.year||'Unknown year')} · ${g.type==='tv'?'Series':'Film'}${g.runtime?' · '+Number(g.runtime)+' min':''}${g.rating?' · ★ '+Number(g.rating).toFixed(1):''}</div><div class="small muted">${escapeHTML((g.genres||[]).join(' · '))}</div>${g.director?'<p class="small muted">Directed by '+escapeHTML(g.director)+'</p>':''}</div><p class="synopsis">${escapeHTML(g.overview||(g.preview?'An example title. Add your video folders to build a playable library.':'No synopsis yet. Find a metadata match or add your own details.'))}</p><div class="row wrap detail-actions" style="grid-column:1/-1"><button class="primary" id="detailPlay">${ico('play')}${entry?.position&&!entry.watched?'Resume':'Play'}</button><button id="detailFavorite">${ico(g.favorite?'check':'plus')}${g.favorite?'In My list':'My list'}</button>${!g.preview?'<button id="findMatch">'+ico('search')+'Find / correct match</button><button id="editDetails">Edit details</button>':''}</div></div>${!g.preview&&(g.lookupError||g.reviewReason)?'<div class="info" style="margin-top:20px">'+escapeHTML(g.lookupError||g.reviewReason)+'</div>':''}${g.preview?'<div class="info" style="margin-top:20px">Preview only · This title is not a video on your computer.</div>':''}${g.cast?.length?'<h3 class="subtle-title">Cast & characters</h3><div class="cast-list">'+g.cast.map(castCard).join('')+'</div>':''}${renderLocalFiles(g)}<div class="sources">Explore: <a href="https://www.imdb.com/find/?q=${q}&s=tt" target="_blank" rel="noopener noreferrer">IMDb</a> &nbsp;·&nbsp; <a href="https://www.justwatch.com/${escapeHTML(settings.region)}/search?q=${q}" target="_blank" rel="noopener noreferrer">JustWatch</a> &nbsp;·&nbsp; <a href="https://www.google.com/search?q=${q}+film+cast" target="_blank" rel="noopener noreferrer">Web search</a>${g.sourceURL?'<br>Metadata: <a href="'+escapeHTML(g.sourceURL)+'" target="_blank" rel="noopener noreferrer">'+escapeHTML(g.provider==='tvmaze'?'TVmaze · CC BY-SA':'TMDB')+'</a> · Cached locally':''}${attributionHTML(g)}</div>`;
+$('#detailPlay').onclick=()=>g.preview?toast('Add your own video folders to play this title.'):play(entry);$('#detailFavorite').onclick=()=>toggleFavorite(key);if(!g.preview){$('#findMatch').onclick=()=>showMatch(key);$('#editDetails').onclick=()=>editDetails(key);bindLocalFiles(g)}openDialog('#detailDialog')}
+function editDetails(key){currentGroup=key;const g=findGroup(key);$('#editName').value=g.title;$('#editYear').value=g.year;$('#editType').value=g.type;$('#editSynopsis').value=g.overview||'';$('#editGenres').value=(g.genres||[]).join(', ');$('#editCast').value=(g.cast||[]).map(c=>c.name+' — '+c.character).join('\n');$('#editCover').value='';openDialog('#editDialog')}
+$('#editForm').onsubmit=async e=>{e.preventDefault();const g=findGroup(currentGroup),file=$('#editCover').files[0];if(file&&(file.size>5e6||!/^image\/(jpeg|png|webp)$/.test(file.type))){toast('Choose a JPEG, PNG, or WebP under 5 MB.');return}const data={title:$('#editName').value.trim(),year:$('#editYear').value.trim(),type:$('#editType').value,overview:$('#editSynopsis').value.trim(),genres:$('#editGenres').value.split(',').map(x=>x.trim()).filter(Boolean),cast:$('#editCast').value.split('\n').filter(Boolean).map(s=>{const parts=s.split(/\s+[—–-]\s+/);const name=parts.shift().trim(),old=g.cast?.find(c=>norm(c.name)===norm(name));return {name,character:parts.join(' — ').trim(),image:old?.image||'',personId:old?.personId||0}}),meta:true,review:false,provider:'manual',sourceURL:'',attributions:attributionsFor(g).map(a=>({...a,modified:true})),metadataFetchedAt:g.metadataFetchedAt||0};if(file)data.poster=await blobToData(file);if(!data.title)return;for(const x of g.entries){Object.assign(x,data);await persist(x)}$('#editDialog').close();render();showDetail(groupKey(g.entries[0]));toast('Your details have been saved.')};
+const connectedFolders=new Set(),disconnectedFiles=new Set();let pendingPlayback=null,resolvingPlayback=false;
+function isAvailable(x){return !!x&&!disconnectedFiles.has(x.id)&&(files.has(x.id)||handles.has(x.id)||connectedFolders.has(x.folderId))}
+async function resolveVideoFile(x){
+ if(files.has(x.id))return files.get(x.id);
+ const folder=folders.find(f=>f.id===x.folderId);
+ if(folder?.handle){
+  let permission=await folder.handle.queryPermission({mode:'read'});
+  if(permission!=='granted')permission=await folder.handle.requestPermission({mode:'read'});
+  if(permission!=='granted')throw new Error('Folder access is needed to play this saved video.');
+  connectedFolders.add(folder.id);
+  const parts=x.path.split('/').filter(Boolean);let dir=folder.handle;
+  for(const part of parts.slice(0,-1))dir=await dir.getDirectoryHandle(part);
+  const handle=await dir.getFileHandle(parts.at(-1));const file=await handle.getFile();
+  handles.set(x.id,handle);files.set(x.id,file);disconnectedFiles.delete(x.id);return file;
+ }
+ if(handles.has(x.id)){const file=await handles.get(x.id).getFile();files.set(x.id,file);return file}
+ throw new Error('Your browser needs you to select this local video again after reopening.');
+}
+function showReconnect(x,error){
+ pendingPlayback=x;$('#reconnectName').textContent=x.name;$('#reconnectReason').textContent=error?.name==='NotFoundError'?'The saved file is no longer at its original path. Select it below.':error?.message||'Select this video to reconnect playback.';
+ $('#reconnectPath').textContent=x.path;openDialog('#reconnectDialog');
+}
+async function play(x){
+ if(!x||resolvingPlayback)return;resolvingPlayback=true;
+ try{
+  const f=await resolveVideoFile(x);if(!f)throw new Error('The selected video is unavailable.');
+  closePlayer();playItem=x;playURL=URL.createObjectURL(f);const v=$('#video');v.src=playURL;
+  $('#playerTitle').textContent=x.title+(x.type==='tv'?' · '+episodeLabel(x):'');$('#playerError').hidden=true;
+  $('#playerNote').textContent='';$('#downloadVideo').href=playURL;$('#downloadVideo').download=x.name;
+  v.onloadedmetadata=()=>{if(x.position&&!x.watched&&x.position<v.duration-3)v.currentTime=x.position;x.duration=Number.isFinite(v.duration)?v.duration:0;v.play().catch(()=>{})};
+  v.onerror=()=>{$('#playerError').hidden=false;$('#playerError').textContent='This browser cannot decode this video or audio track. Open the original file in VLC/mpv, or use MP4 with H.264/AAC or WebM.'};
+  const stem=x.folderId+'/'+x.path.replace(/\.[^.]+$/,'');const sub=[...subtitles].find(([p])=>p.replace(/(?:\.[a-z]{2,3})?\.(srt|vtt)$/i,'')===stem);
+  if(sub)try{await attachSubtitles(sub[1])}catch(e){toast('Video opened; the subtitle could not be loaded: '+e.message)}
+  openDialog('#playerDialog');v.tabIndex=0;v.focus();render();
+ }catch(e){disconnectedFiles.add(x.id);showReconnect(x,e)}finally{resolvingPlayback=false}
+}
+$('#reconnectFileBtn').onclick=()=>{$('#reconnectInput').value='';$('#reconnectInput').click()};
+$('#reconnectInput').onchange=async e=>{const f=e.target.files[0],x=pendingPlayback;if(!f||!x)return;if(!videoExt.test(f.name)){toast('Choose a video file.');return}if(f.name.toLowerCase()!==x.name.toLowerCase()&&!confirm(`The selected file is “${f.name}”. Play it as “${x.title}”?`))return;files.set(x.id,f);disconnectedFiles.delete(x.id);$('#reconnectDialog').close();await play(x)};
+$('#reconnectFolderBtn').onclick=async()=>{const x=pendingPlayback;$('#reconnectDialog').close();await addFolder();if(x&&isAvailable(x))await play(x)};
+
+let lastProgressSave=0;
+function saveProgress(){const v=$('#video');if(!playItem||!Number.isFinite(v.currentTime)||!Number.isFinite(v.duration)||!v.duration)return;playItem.position=v.currentTime;playItem.duration=v.duration;if(v.currentTime/v.duration>.95)playItem.watched=true;persist(playItem)}
+$('#video').addEventListener('playing',()=>{if(playItem){playItem.lastPlayed=Date.now();persist(playItem)}});
+$('#video').addEventListener('timeupdate',()=>{if(Date.now()-lastProgressSave>4000){saveProgress();lastProgressSave=Date.now()}});$('#video').addEventListener('pause',saveProgress);$('#video').addEventListener('ended',()=>{saveProgress();if(playItem){playItem.watched=true;persist(playItem)}});
+function closePlayer(){const v=$('#video');saveProgress();v.pause();v.removeAttribute('src');v.load();v.querySelectorAll('track').forEach(t=>t.remove());if(playURL)URL.revokeObjectURL(playURL);if(subURL)URL.revokeObjectURL(subURL);playItem=null;playURL=null;subURL=null}
+$('#playerDialog').addEventListener('close',()=>{closePlayer();render();if($('#detailDialog').open&&currentGroup)showDetail(currentGroup)});document.addEventListener('visibilitychange',()=>{if(document.hidden)saveProgress()});window.addEventListener('pagehide',saveProgress);
+async function attachSubtitles(file){let text=await file.text();if(/\.srt$/i.test(file.name))text='WEBVTT\n\n'+text.replace(/^\uFEFF/,'').replace(/\r\n/g,'\n').replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g,'$1.$2');if(!text.trimStart().startsWith('WEBVTT'))throw new Error('Subtitle file must be valid SRT or VTT.');$('#video').querySelectorAll('track').forEach(t=>t.remove());if(subURL)URL.revokeObjectURL(subURL);subURL=URL.createObjectURL(new Blob([text],{type:'text/vtt'}));const track=document.createElement('track');track.kind='subtitles';track.label=file.name;track.srclang='en';track.src=subURL;track.default=true;$('#video').append(track);track.track.mode='showing';$('#playerNote').textContent='Subtitles: '+file.name}
+let activeVideoDirectory=null,subtitleChoices=[];
+async function videoDirectory(x){
+ const folder=folders.find(f=>f.id===x?.folderId);if(!folder?.handle)return null;
+ if(await folder.handle.queryPermission({mode:'read'})!=='granted')return null;
+ let dir=folder.handle;for(const name of x.path.split('/').filter(Boolean).slice(0,-1))dir=await dir.getDirectoryHandle(name);return dir;
+}
+async function subtitlesNearVideo(x){
+ const prefix=x.path.includes('/')?x.path.slice(0,x.path.lastIndexOf('/')+1):'';
+ const found=new Map();for(const [key,file]of subtitles){if(!key.startsWith(x.folderId+'/'))continue;const relative=key.slice(x.folderId.length+1);if(relative.slice(0,relative.lastIndexOf('/')+1)===prefix)found.set(file.name,file)}
+ activeVideoDirectory=null;
+ try{activeVideoDirectory=await videoDirectory(x);if(activeVideoDirectory)for await(const[name,handle]of activeVideoDirectory.entries()){if(handle.kind==='file'&&/\.(srt|vtt)$/i.test(name)){const file=await handle.getFile();found.set(name,file);subtitles.set(x.folderId+'/'+prefix+name,file)}}}catch{}
+ const stem=x.name.replace(/\.[^.]+$/,'').toLowerCase();return [...found.values()].sort((a,b)=>Number(!a.name.toLowerCase().startsWith(stem))-Number(!b.name.toLowerCase().startsWith(stem))||a.name.localeCompare(b.name));
+}
+async function showSubtitles(){
+ if(!playItem)return;$('#subtitleVideo').textContent=playItem.name;$('#subtitleList').innerHTML='<p class="small muted">Looking beside the video…</p>';openDialog('#subtitlesDialog');
+ subtitleChoices=await subtitlesNearVideo(playItem);
+ $('#subtitleList').innerHTML=subtitleChoices.length?subtitleChoices.map((file,i)=>`<div class="file-row"><div class="file-label"><strong>${escapeHTML(file.name)}</strong></div><button data-subtitle="${i}">Use subtitle</button></div>`).join(''):'<p class="small muted">No SRT or VTT subtitles are available beside this video. Browse to select one.</p>';
+ $('#subtitleList').querySelectorAll('[data-subtitle]').forEach(b=>b.onclick=async()=>{try{await attachSubtitles(subtitleChoices[+b.dataset.subtitle]);$('#subtitlesDialog').close()}catch(e){toast(e.message)}});
+ $('#subtitleFolderStatus').textContent=activeVideoDirectory?'Browse will start in the video’s folder.':'This browser has no folder handle for this video. The fallback picker chooses its own starting folder.';
+}
+async function browseSubtitle(){
+ if(window.showOpenFilePicker&&activeVideoDirectory){try{const [handle]=await window.showOpenFilePicker({id:'frame-subtitles',startIn:activeVideoDirectory,multiple:false,types:[{description:'Subtitles',accept:{'text/plain':['.srt','.vtt']}}]});await attachSubtitles(await handle.getFile());$('#subtitlesDialog').close();return}catch(e){if(e.name==='AbortError')return;toast('Folder picker unavailable; using the browser file picker.')}}
+ $('#subtitleInput').value='';$('#subtitleInput').click();
+}
+$('#subtitleBtn').onclick=showSubtitles;$('#browseSubtitleBtn').onclick=browseSubtitle;
+$('#subtitleInput').onchange=async e=>{if(e.target.files[0])try{await attachSubtitles(e.target.files[0]);$('#subtitlesDialog').close()}catch(e){toast(e.message)}};
+$('#subtitlesOffBtn').onclick=()=>{$('#video').querySelectorAll('track').forEach(t=>t.remove());if(subURL)URL.revokeObjectURL(subURL);subURL=null;$('#playerNote').textContent='';$('#subtitlesDialog').close()};
+function joinedSourcePath(root,relative){const windows=/^[a-z]:[\\/]|^\\\\/i.test(root),separator=windows?'\\':'/';return root.replace(/[\\/]+$/,'')+separator+relative.replace(/[\\/]/g,separator)}
+function sourceLocation(){if(!playItem)return '';const folder=folders.find(f=>f.id===playItem.folderId),loose=folder?.name==='Selected files';const root=loose?playItem.externalDirectory:folder?.locationRoot;return root?joinedSourcePath(root,loose?playItem.name:playItem.path):''}
+function showFileLocation(){if(!playItem)return;const folder=folders.find(f=>f.id===playItem.folderId),loose=folder?.name==='Selected files';$('#sourceFilename').textContent=playItem.name;$('#sourceRelative').textContent=(folder?.name||'Library')+' / '+playItem.path;$('#sourceRootLabel').textContent=loose?'Video’s containing folder':'Full path to library folder “'+(folder?.name||'')+'”';$('#sourceRoot').value=(loose?playItem.externalDirectory:folder?.locationRoot)||'';$('#sourceFullPath').textContent=sourceLocation()||'Add the folder path once to copy the original file’s full location.';openDialog('#fileLocationDialog')}
+async function saveSourceLocation(){
+ if(!playItem)return '';const value=$('#sourceRoot').value.trim();if(!/^(?:[a-z]:[\\/]|\\\\[^\\]+\\[^\\]+|\/)/i.test(value)||/[\x00-\x1f]/.test(value)){toast('Enter an absolute folder path, for example D:\\Movies.');return ''}
+ const folder=folders.find(f=>f.id===playItem.folderId);if(folder?.name==='Selected files'){playItem.externalDirectory=value;await persist(playItem)}else if(folder){folder.locationRoot=value;await request('folders','put',folder)}
+ const result=sourceLocation();$('#sourceFullPath').textContent=result;return result;
+}
+$('#fileLocationBtn').onclick=showFileLocation;$('#saveSourceRoot').onclick=async()=>{if(await saveSourceLocation())toast('Original folder location saved.')};
+$('#copySourcePath').onclick=async()=>{const text=await saveSourceLocation();if(!text)return;try{await navigator.clipboard.writeText(text);toast('Original video path copied. Paste it into your desktop player or File Explorer.')}catch{const range=document.createRange();range.selectNodeContents($('#sourceFullPath'));const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);toast('Press Ctrl+C to copy the selected original file path.')}};
+function playerKeyboard(e){
+ if(!$('#playerDialog').open||$('#subtitlesDialog').open||$('#fileLocationDialog').open||e.ctrlKey||e.metaKey||e.altKey)return;
+ if(e.target.closest?.('input,textarea,select,[contenteditable="true"]'))return;
+ const v=$('#video');if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+  let end=Number.isFinite(v.duration)?v.duration:v.seekable.length?v.seekable.end(v.seekable.length-1):null;
+  if(end===null)return;e.preventDefault();e.stopImmediatePropagation();v.currentTime=Math.max(0,Math.min(end,v.currentTime+(e.key==='ArrowRight'?10:-10)));saveProgress();return;
+ }
+ if((e.code==='Space'||e.key.toLowerCase()==='k')&&!e.target.closest?.('button,a')){e.preventDefault();e.stopImmediatePropagation();v.paused?v.play().catch(()=>{}):v.pause()}
+}
+document.addEventListener('keydown',playerKeyboard,true);
+function castCard(person){const image=imageSource(person.image),initials=person.name.split(/\s+/).filter(Boolean).slice(0,2).map(s=>s[0]).join('');return `<div class="cast-person"><span class="cast-avatar">${imageTag(person.image,'cast-photo')}<span class="cast-initials" ${image?'hidden':''}>${escapeHTML(initials)}</span></span><div class="cast-label">${escapeHTML(person.name)}<span>${escapeHTML(person.character)}</span></div></div>`}
+
+$('#fullscreenBtn').onclick=()=>$('#video').requestFullscreen?.().catch(()=>toast('Full screen is unavailable in this browser.'));
+$('#exportBtn').onclick=async()=>{await expireProviderData();const data={app:'FRAME',version:1,exported:new Date().toISOString(),dataNotices:BACKUP_NOTICES,items:items.map(backupItem),folders:folders.map(({id,name,added,locationRoot})=>({id,name,added,locationRoot})),art:[...art].filter(([id])=>!isTMDBImage(id)).map(([id,data])=>({id,data,cachedAt:artDates.get(id)||0}))};const url=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='FRAME-library-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);toast('Backup exported without videos, credentials, or TMDB content. Keep it private: it contains file paths and viewing history.')};
+$('#importBtn').onclick=()=>{$('#backupInput').value='';$('#backupInput').click()};
+function validImportedItem(x){if(!x||typeof x.id!=='string'||typeof x.folderId!=='string'||typeof x.path!=='string'||typeof x.title!=='string')return null;const y={};for(const k of ['id','folderId','path','name','searchTitle','searchYear','title','year','overview','provider','director','externalDirectory'])y[k]=String(x[k]||'').slice(0,k==='overview'?10000:1000);y.type=x.type==='tv'?'tv':'movie';for(const k of ['size','modified','added','season','episode','rating','runtime','position','duration','sourceId','lastPlayed','lastMetadataAttempt','castImageSchema','metadataFetchedAt'])y[k]=Math.max(0,Number(x[k])||0);for(const k of ['favorite','watched','meta','review'])y[k]=!!x[k];y.poster=safeImage(x.poster);y.backdrop=safeImage(x.backdrop);y.imdb=/^tt\d+$/.test(x.imdb)?x.imdb:'';y.genres=Array.isArray(x.genres)?x.genres.filter(s=>typeof s==='string').slice(0,30).map(s=>s.slice(0,100)):[];y.cast=Array.isArray(x.cast)?x.cast.slice(0,30).map(c=>({name:String(c.name||'').slice(0,200),character:String(c.character||'').slice(0,200),image:safeImage(c.image),personId:Math.max(0,Number(c.personId)||0)})):[];try{const u=new URL(x.sourceURL);if(u.protocol==='https:'&&['www.themoviedb.org','www.tvmaze.com'].includes(u.hostname))y.sourceURL=u.href}catch{}y.attributions=attributionsFor(x);return hasTMDBData(y)&&isExpired(y.metadataFetchedAt)?withoutTMDBData(y):y}
+$('#backupInput').onchange=async e=>{const f=e.target.files[0];if(!f)return;if(f.size>150e6){toast('Backup is too large (maximum 150 MB).');return}try{const data=JSON.parse(await f.text());if(data.app!=='FRAME'||data.version!==1||!Array.isArray(data.items)||!Array.isArray(data.folders)||!Array.isArray(data.art))throw new Error('Choose a FRAME version 1 library backup.');const imported=data.items.map(validImportedItem).filter(Boolean);if(imported.length!==data.items.length)throw new Error('The backup contains invalid video records.');await beginTask('Restoring library…',async()=>{for(const f of data.folders){if(typeof f.id!=='string'||typeof f.name!=='string')continue;if(!folders.some(x=>x.id===f.id)){const clean={id:f.id,name:f.name.slice(0,500),added:Number(f.added)||Date.now(),locationRoot:typeof f.locationRoot==='string'?f.locationRoot.slice(0,2000):'',fallback:true};folders.push(clean);await request('folders','put',clean)}}for(const x of imported){if(cancelled)break;const old=items.find(i=>i.id===x.id);if(old)Object.assign(old,x);else items.push(x);await persist(x)}for(const a of data.art){if(cancelled)break;if(typeof a.id==='string'&&safeImage(a.id)&&typeof a.data==='string'&&a.data.startsWith('data:image/')&&safeImage(a.data)){if(isTMDBImage(a.id)&&isExpired(a.cachedAt))continue;art.set(a.id,a.data);artDates.set(a.id,Number(a.cachedAt)||Date.now());await request('art','put',{id:a.id,data:a.data,cachedAt:artDates.get(a.id)})}}await expireProviderData();preview=false;toast('Library restored. Reconnect its original folders to play.');showFolderList()})}catch(e){toast('Import failed: '+e.message)}};
+$('#addFolderBtn').onclick=addFolder;$('#settingsAdd').onclick=addFolder;$('#settingsBtn').onclick=showSettings;$('#foldersBtn').onclick=showSettings;$('#helpBtn').onclick=()=>openDialog('#helpDialog');$('#helpAdd').onclick=()=>{$('#helpDialog').close();addFolder()};$('#addFilesBtn').onclick=()=>{$('#fileInput').value='';$('#fileInput').click()};$('#brand').onclick=e=>{e.preventDefault();setView('all')};$('#lookupAll').onclick=lookupAll;$$('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));$$('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;if(view==='movie'||view==='tv')view='all';render()});$('#search').oninput=render;$('#sort').onchange=render;$('#genre').onchange=render;$('#statusFilter').onchange=render;
+async function init(){render();try{db=await new Promise((resolve,reject)=>{const req=indexedDB.open('FRAME-local-cinema',1);req.onupgradeneeded=()=>{for(const store of ['items','folders','settings','art'])if(!req.result.objectStoreNames.contains(store))req.result.createObjectStore(store,{keyPath:'id'})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);req.onblocked=()=>reject(new Error('Close another FRAME tab to update its storage.'))});const [savedItems,savedFolders,prefs,savedArt]=await Promise.all([request('items','getAll'),request('folders','getAll'),request('settings','get','preferences'),request('art','getAll')]);items=savedItems||[];folders=savedFolders||[];if(prefs){settings={...defaults,...prefs};if(prefs.autoSchema!==1){settings.auto=true;settings.autoSchema=1}}for(const a of savedArt||[]){art.set(a.id,a.data);artDates.set(a.id,Number(a.cachedAt)||0)}await expireProviderData();for(const x of items){if(!x.meta){const f=folders.find(f=>f.id===x.folderId);const parsed=cleanName(x.path,f?.name||'');Object.assign(x,parsed,{searchTitle:parsed.title,searchYear:parsed.year});await persist(x)}}inheritSeriesMetadata();for(const f of folders){if(f.handle)try{if(await f.handle.queryPermission({mode:'read'})==='granted')connectedFolders.add(f.id)}catch{}}if(items.length)preview=false;render();if(canAutoLookup())lookupAll({automatic:true})}catch(e){toast('Persistent storage is unavailable. This session still works; export your library before closing.')}}
+window.addEventListener('unhandledrejection',e=>{e.preventDefault();toast(e.reason?.message||'An operation failed. Please try again.')});
+init();
+setInterval(()=>{if(db&&!busy)expireProviderData().then(render).catch(()=>{})},60000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&db&&!busy)expireProviderData().then(render).catch(()=>{})});
+</script></body></html>

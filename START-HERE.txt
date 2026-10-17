@@ -1,0 +1,24 @@
+FRAME 0.1.0 — personal noncommercial edition
+
+1. Extract this download and open FRAME.html in desktop Chrome or Edge.
+2. Select Add folder, or About & help > Add individual files.
+3. Settings: supply your own TMDB credential for films/series, choose TVmaze for
+   key-free series metadata, or use Offline/manual mode.
+4. Run Auto-match library. Choose a title, then Play or Resume.
+
+Keep FRAME.html in the same place when updating. Export a private library backup
+first, and reconnect the original folders when asked. Do not publish your backup.
+It may contain filenames, paths and viewing history. New backups omit TMDB
+content but keep match IDs to refresh it with your own credential.
+
+Folder permissions, supported codecs, subtitles and native desktop-player access
+depend on browser limits. See About & help in the app; the source repository also
+includes a full README. No movies, video downloads, shared API
+key, server or installer are included. FRAME cannot work in the background while
+its page is closed. There is no cloud sync.
+
+Original application: FRAME Personal Noncommercial License 1.0 (LICENSE).
+Free personal use, modification and free sharing under the same terms are allowed.
+Commercial use and monetization are not licensed. Third-party fonts, logos and
+provider content retain their own terms; see THIRD_PARTY_NOTICES.md and licenses/.
+Complete notices also travel inside FRAME.html under About & help.

@@ -1,0 +1,66 @@
+FRAME Personal Noncommercial License 1.0
+SPDX-License-Identifier: LicenseRef-FRAME-Personal-Noncommercial-1.0
+
+Copyright (c) 2026 FRAME contributors.
+
+1. Scope and rights holders
+This license covers the original FRAME software and documentation distributed
+with this notice (the "Software"), to the extent that the respective contributors
+hold rights in them. Each contributor licenses only the rights they hold. No
+exclusive rights are claimed in material that is not protected by applicable law.
+Third-party materials and service data are excluded as described in section 5.
+
+2. Permission
+Subject to these conditions, you may download, install, run, study, copy and
+modify the Software, without charge, solely for your own personal, noncommercial
+purposes. You may share unchanged or modified copies, including source code and
+standalone builds, without charge for others' personal, noncommercial use. Public
+source repositories, unpaid contributions, and free mirrors are permitted for
+these purposes, including the technical copying needed by a repository host.
+Ordinary advertising supplied by a repository host without revenue to you does
+not by itself make this permitted sharing commercial.
+
+3. Restrictions and distribution conditions
+You may not sell, rent, sublicense for a fee, monetize, or commercially exploit
+the Software. This includes paid downloads or access, subscriptions, advertising
+or affiliate revenue associated with the Software, commercial hosting, and use
+in or on behalf of a business or professional service. Use by organizations is
+not licensed except for the hosting and sharing expressly allowed in section 2.
+Uses outside this grant require separate permission from the applicable rights
+holders. Free distribution does not authorize commercial use by recipients.
+
+Every copy or substantial portion of the Software must retain this license,
+applicable copyright notices, and third-party notices. Distributed modifications
+must be identified as modified and retain these terms for the covered Software.
+You must not imply that a modified version is an official release or endorsed by
+the original contributors. This license grants no trademark rights, except for
+truthful identification and preservation of notices. You may not impose terms
+on third-party materials that conflict with their own licenses.
+
+4. Termination
+Your permission under this license ends automatically if you violate its terms.
+You must then cease the unlicensed use and distribution. Rights of compliant
+recipients are not terminated solely because an upstream distributor breached
+this license. Rights and exceptions provided by applicable law are unaffected.
+
+5. Third-party exclusions
+Inter font files remain under the SIL Open Font License 1.1. The TMDB logo and
+TMDB API content remain subject to their owners' rights and applicable provider
+terms. TVmaze data is subject to CC BY-SA 4.0; the personal-use and noncommercial
+restrictions in this license do not apply to that data or to other third-party
+materials. See THIRD_PARTY_NOTICES.md and licenses/. No rights to movies,
+television episodes, subtitles, posters, photographs, or third-party trademarks
+are granted by this license. API access requires compliance with the relevant
+service's own terms and any required credentials.
+
+6. No warranty; limitation of liability
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE IS PROVIDED
+"AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE CONTRIBUTORS OR DISTRIBUTORS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR ITS USE, WHETHER IN CONTRACT, TORT OR OTHERWISE. NOTHING IN THIS
+LICENSE EXCLUDES LIABILITY OR RIGHTS THAT CANNOT LAWFULLY BE EXCLUDED.
+
+This is a source-available, personal noncommercial license. It is not an
+OSI-approved open-source license and does not grant unrestricted use.

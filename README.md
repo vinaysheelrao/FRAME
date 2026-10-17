@@ -139,4 +139,3 @@ or endorsement is implied. The FRAME name has not undergone a trademark search.
 See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and the
 [publishing guide](docs/PUBLISHING.md). Do not submit API keys, library backups,
 real video files or third-party posters in issues or pull requests.
-
